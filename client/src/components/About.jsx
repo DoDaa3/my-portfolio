@@ -1,8 +1,4 @@
-import { useState } from 'react';
-
 function About() {
-  const [zoomed, setZoomed] = useState(false);
-
   return (
     <section id="about" className="section-padding bg-gray-50 dark:bg-gray-900">
       <div className="container-max">
@@ -13,12 +9,7 @@ function About() {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Profile image placeholder */}
           <div className="flex justify-center">
-            <div
-              onClick={() => setZoomed(!zoomed)}
-              className={`w-64 h-64 sm:w-80 sm:h-80 rounded-2xl bg-gradient-to-br from-primary-400 to-primary-700 flex items-center justify-center shadow-xl cursor-pointer transition-all duration-500 ease-out ${
-                zoomed ? 'scale-125 shadow-2xl shadow-primary-600/40' : 'scale-100 hover:scale-105'
-              }`}
-            >
+            <div className="w-64 h-64 sm:w-80 sm:h-80 rounded-2xl bg-gradient-to-br from-primary-400 to-primary-700 flex items-center justify-center shadow-xl">
               <svg
                 className="w-32 h-32 text-white/80"
                 fill="none"
