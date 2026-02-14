@@ -1,36 +1,86 @@
+import { useState, useEffect } from 'react';
+
+const roles = ['Full Stack Developer', 'MERN Specialist', 'UI/UX Enthusiast', 'Problem Solver'];
+
 function Hero() {
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [text, setText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentRole = roles[roleIndex];
+    const timeout = setTimeout(
+      () => {
+        if (!isDeleting) {
+          setText(currentRole.slice(0, text.length + 1));
+          if (text.length + 1 === currentRole.length) {
+            setTimeout(() => setIsDeleting(true), 1500);
+          }
+        } else {
+          setText(currentRole.slice(0, text.length - 1));
+          if (text.length === 0) {
+            setIsDeleting(false);
+            setRoleIndex((prev) => (prev + 1) % roles.length);
+          }
+        }
+      },
+      isDeleting ? 40 : 80
+    );
+    return () => clearTimeout(timeout);
+  }, [text, isDeleting, roleIndex]);
+
   return (
     <section
       id="hero"
-      className="min-h-screen flex items-center justify-center section-padding pt-24"
+      className="relative min-h-screen flex items-center justify-center section-padding pt-24 overflow-hidden"
     >
-      <div className="container-max text-center">
-        <p className="text-primary-600 dark:text-primary-400 font-medium mb-4 animate-fade-in">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-primary-400/10 dark:bg-primary-400/5 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary-600/10 dark:bg-primary-600/5 rounded-full blur-3xl animate-float-delayed" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-primary-200/20 to-transparent dark:from-primary-800/10 rounded-full blur-3xl" />
+      </div>
+
+      <div className="container-max text-center relative z-10">
+        <p className="text-primary-600 dark:text-primary-400 font-medium mb-4 animate-fade-in tracking-wider uppercase text-sm">
           Hello, I'm
         </p>
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 animate-slide-up">
-          <span className="bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent">
+        <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold mb-6 animate-slide-up">
+          <span className="bg-gradient-to-r from-primary-600 via-primary-500 to-primary-400 bg-clip-text text-transparent">
             Omar Amine
           </span>
         </h1>
-        <h2 className="text-xl sm:text-2xl md:text-3xl text-gray-600 dark:text-gray-400 mb-8 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-          Full Stack Developer
+        <h2
+          className="text-xl sm:text-2xl md:text-3xl text-gray-600 dark:text-gray-400 mb-8 animate-slide-up h-9 sm:h-10 md:h-12"
+          style={{ animationDelay: '0.2s' }}
+        >
+          <span>{text}</span>
+          <span className="inline-block w-0.5 h-6 sm:h-7 md:h-8 bg-primary-500 ml-1 animate-pulse align-middle" />
         </h2>
-        <p className="max-w-2xl mx-auto text-gray-600 dark:text-gray-400 text-lg mb-10 animate-slide-up" style={{ animationDelay: '0.4s' }}>
+        <p
+          className="max-w-2xl mx-auto text-gray-600 dark:text-gray-400 text-lg mb-10 animate-slide-up leading-relaxed"
+          style={{ animationDelay: '0.4s' }}
+        >
           I build modern, responsive web applications with clean code and great
           user experiences. Passionate about turning ideas into reality through
           technology.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style={{ animationDelay: '0.6s' }}>
+        <div
+          className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up"
+          style={{ animationDelay: '0.6s' }}
+        >
           <a
             href="#projects"
             onClick={(e) => {
               e.preventDefault();
               document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="px-8 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-medium transition-all duration-200 hover:shadow-lg hover:shadow-primary-600/25"
+            className="group px-8 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-medium transition-all duration-300 hover:shadow-lg hover:shadow-primary-600/25 hover:-translate-y-0.5"
           >
             View My Work
+            <span className="inline-block ml-2 transition-transform duration-300 group-hover:translate-x-1">
+              &rarr;
+            </span>
           </a>
           <a
             href="#contact"
@@ -38,7 +88,7 @@ function Hero() {
               e.preventDefault();
               document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="px-8 py-3 border-2 border-primary-600 dark:border-primary-400 text-primary-600 dark:text-primary-400 hover:bg-primary-600 hover:text-white dark:hover:bg-primary-400 dark:hover:text-gray-900 rounded-lg font-medium transition-all duration-200"
+            className="px-8 py-3 border-2 border-primary-600 dark:border-primary-400 text-primary-600 dark:text-primary-400 hover:bg-primary-600 hover:text-white dark:hover:bg-primary-400 dark:hover:text-gray-900 rounded-lg font-medium transition-all duration-300 hover:-translate-y-0.5"
           >
             Contact Me
           </a>

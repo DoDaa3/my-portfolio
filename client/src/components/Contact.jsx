@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
 
@@ -6,6 +7,9 @@ function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState({ type: '', message: '' });
   const [submitting, setSubmitting] = useState(false);
+  const [titleRef, titleVisible] = useScrollAnimation();
+  const [infoRef, infoVisible] = useScrollAnimation(0.2);
+  const [formRef, formVisible] = useScrollAnimation(0.2);
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -41,13 +45,19 @@ function Contact() {
   return (
     <section id="contact" className="section-padding">
       <div className="container-max">
-        <h2 className="section-title">
+        <h2
+          ref={titleRef}
+          className={`section-title scroll-hidden ${titleVisible ? 'scroll-visible' : ''}`}
+        >
           Get In <span className="text-primary-600 dark:text-primary-400">Touch</span>
         </h2>
 
         <div className="grid md:grid-cols-2 gap-12">
           {/* Contact info */}
-          <div>
+          <div
+            ref={infoRef}
+            className={`scroll-hidden-left ${infoVisible ? 'scroll-visible-x' : ''}`}
+          >
             <h3 className="text-2xl font-semibold mb-4">Let's work together</h3>
             <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
               I'm always open to discussing new projects, creative ideas, or
@@ -55,47 +65,61 @@ function Contact() {
             </p>
 
             <div className="space-y-4">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center">
-                  <svg className="w-5 h-5 text-primary-600 dark:text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              {[
+                {
+                  icon: (
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Email</p>
-                  <p className="font-medium">amineomar019@gmail.com</p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center">
-                  <svg className="w-5 h-5 text-primary-600 dark:text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Location</p>
-                  <p className="font-medium">Casablanca, Morocco</p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center">
-                  <svg className="w-5 h-5 text-primary-600 dark:text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  ),
+                  label: 'Email',
+                  value: 'amineomar019@gmail.com',
+                },
+                {
+                  icon: (
+                    <>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </>
+                  ),
+                  label: 'Location',
+                  value: 'Casablanca, Morocco',
+                },
+                {
+                  icon: (
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+                  ),
+                  label: 'Availability',
+                  value: 'Open to opportunities',
+                },
+              ].map((item, i) => (
+                <div
+                  key={item.label}
+                  className="flex items-center gap-4 group"
+                  style={{
+                    opacity: infoVisible ? 1 : 0,
+                    transform: infoVisible ? 'translateX(0)' : 'translateX(-20px)',
+                    transition: `opacity 0.4s ease ${300 + i * 150}ms, transform 0.4s ease ${300 + i * 150}ms`,
+                  }}
+                >
+                  <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center group-hover:scale-110 group-hover:bg-primary-200 dark:group-hover:bg-primary-900/50 transition-all duration-300">
+                    <svg className="w-5 h-5 text-primary-600 dark:text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      {item.icon}
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">{item.label}</p>
+                    <p className="font-medium">{item.value}</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Availability</p>
-                  <p className="font-medium">Open to opportunities</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
           {/* Contact form */}
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form
+            ref={formRef}
+            onSubmit={handleSubmit}
+            className={`space-y-5 scroll-hidden-right ${formVisible ? 'scroll-visible-x' : ''}`}
+          >
             <div>
               <label htmlFor="name" className="block text-sm font-medium mb-2">
                 Name
@@ -159,7 +183,7 @@ function Contact() {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full px-6 py-3 bg-primary-600 hover:bg-primary-700 disabled:bg-primary-400 text-white rounded-lg font-medium transition-all duration-200 hover:shadow-lg hover:shadow-primary-600/25 disabled:cursor-not-allowed"
+              className="w-full px-6 py-3 bg-primary-600 hover:bg-primary-700 disabled:bg-primary-400 text-white rounded-lg font-medium transition-all duration-300 hover:shadow-lg hover:shadow-primary-600/25 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:hover:translate-y-0"
             >
               {submitting ? 'Sending...' : 'Send Message'}
             </button>

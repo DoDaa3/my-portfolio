@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import ProjectCard from './ProjectCard';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 // Fallback projects used when the API is unavailable
 const fallbackProjects = [
@@ -70,6 +71,7 @@ const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
 function Projects() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [titleRef, titleVisible] = useScrollAnimation();
 
   useEffect(() => {
     async function fetchProjects() {
@@ -90,7 +92,10 @@ function Projects() {
   return (
     <section id="projects" className="section-padding bg-gray-50 dark:bg-gray-900">
       <div className="container-max">
-        <h2 className="section-title">
+        <h2
+          ref={titleRef}
+          className={`section-title scroll-hidden ${titleVisible ? 'scroll-visible' : ''}`}
+        >
           My <span className="text-primary-600 dark:text-primary-400">Projects</span>
         </h2>
 
@@ -116,8 +121,8 @@ function Projects() {
           </div>
         ) : (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project) => (
-              <ProjectCard key={project._id} project={project} />
+            {projects.map((project, i) => (
+              <ProjectCard key={project._id} project={project} index={i} />
             ))}
           </div>
         )}
