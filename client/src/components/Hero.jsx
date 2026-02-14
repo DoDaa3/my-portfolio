@@ -5,13 +5,6 @@ function Hero() {
       className="min-h-screen flex items-center justify-center section-padding pt-24"
     >
       <div className="container-max text-center">
-        <div className="mb-8 animate-fade-in">
-          <img
-            src="/images/profile.jpg"
-            alt="Omar Amine"
-            className="w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 rounded-full mx-auto object-cover border-4 border-primary-500 shadow-lg shadow-primary-500/25"
-          />
-        </div>
         <p className="text-primary-600 dark:text-primary-400 font-medium mb-4 animate-fade-in">
           Hello, I'm
         </p>
