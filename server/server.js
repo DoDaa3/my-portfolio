@@ -11,7 +11,15 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:3000',
+  origin: function (origin, callback) {
+    // Allow requests with no origin (mobile apps, curl, etc.)
+    if (!origin) return callback(null, true);
+    // In production, restrict to CLIENT_URL; in dev, allow any origin
+    if (process.env.CLIENT_URL) {
+      return callback(null, process.env.CLIENT_URL);
+    }
+    return callback(null, true);
+  },
   methods: ['GET', 'POST'],
 }));
 app.use(express.json());
