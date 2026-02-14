@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: my-portfolio
+    runtime: node
+    buildCommand: npm run install:server && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: EMAIL_USER
+        sync: false
+      - key: EMAIL_PASS
+        sync: false

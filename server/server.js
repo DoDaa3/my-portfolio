@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
@@ -12,9 +13,7 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow requests with no origin (mobile apps, curl, etc.)
     if (!origin) return callback(null, true);
-    // In production, restrict to CLIENT_URL; in dev, allow any origin
     if (process.env.CLIENT_URL) {
       return callback(null, process.env.CLIENT_URL);
     }
@@ -24,13 +23,19 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// Routes
+// API Routes
 app.use('/api/contact', contactRoutes);
 app.use('/api/projects', projectRoutes);
 
-// Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });
+});
+
+// Serve React build in production
+const clientBuild = path.join(__dirname, '..', 'client', 'build');
+app.use(express.static(clientBuild));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(clientBuild, 'index.html'));
 });
 
 // Connect to MongoDB and start server

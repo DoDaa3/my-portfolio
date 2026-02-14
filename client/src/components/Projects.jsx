@@ -67,8 +67,7 @@ const fallbackProjects = [
 ];
 
 const API_URL =
-  process.env.REACT_APP_API_URL ||
-  `${window.location.protocol}//${window.location.hostname}:5001`;
+  process.env.REACT_APP_API_URL || '';
 
 function Projects() {
   const [projects, setProjects] = useState([]);

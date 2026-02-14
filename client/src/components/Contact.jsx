@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
+// In dev, proxy to local backend; in production, same origin serves both
 const API_URL =
-  process.env.REACT_APP_API_URL ||
-  `${window.location.protocol}//${window.location.hostname}:5001`;
+  process.env.REACT_APP_API_URL || '';
 
 function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
