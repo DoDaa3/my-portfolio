@@ -10,7 +10,7 @@ function Hero() {
         </p>
         <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 animate-slide-up">
           <span className="bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent">
-            John Doe
+            Omar Amine
           </span>
         </h1>
         <h2 className="text-xl sm:text-2xl md:text-3xl text-gray-600 dark:text-gray-400 mb-8 animate-slide-up" style={{ animationDelay: '0.2s' }}>

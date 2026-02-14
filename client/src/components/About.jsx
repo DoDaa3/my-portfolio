@@ -29,7 +29,7 @@ function About() {
           {/* Bio */}
           <div>
             <h3 className="text-2xl font-semibold mb-4">
-              A passionate developer based in San Francisco
+              A passionate developer based in Casablanca, Morocco
             </h3>
             <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
               I'm a full-stack developer with 3+ years of experience building web

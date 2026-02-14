@@ -63,7 +63,7 @@ function Contact() {
                 </div>
                 <div>
                   <p className="text-sm text-gray-500 dark:text-gray-400">Email</p>
-                  <p className="font-medium">hello@johndoe.dev</p>
+                  <p className="font-medium">amineomar019@gmail.com</p>
                 </div>
               </div>
 
@@ -76,7 +76,7 @@ function Contact() {
                 </div>
                 <div>
                   <p className="text-sm text-gray-500 dark:text-gray-400">Location</p>
-                  <p className="font-medium">San Francisco, CA</p>
+                  <p className="font-medium">Casablanca, Morocco</p>
                 </div>
               </div>
 
