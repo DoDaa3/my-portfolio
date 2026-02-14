@@ -1,33 +1,64 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 const roles = ['Full Stack Developer', 'MERN Specialist', 'UI/UX Enthusiast', 'Problem Solver'];
 
 function Hero() {
-  const [roleIndex, setRoleIndex] = useState(0);
   const [text, setText] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [cursorVisible, setCursorVisible] = useState(true);
+  const phase = useRef('typing'); // typing | pausing | deleting | waiting
+  const roleIdx = useRef(0);
+  const charIdx = useRef(0);
+  const timer = useRef(null);
+
+  const tick = useCallback(() => {
+    const current = roles[roleIdx.current];
+
+    switch (phase.current) {
+      case 'typing':
+        charIdx.current++;
+        setText(current.slice(0, charIdx.current));
+        if (charIdx.current >= current.length) {
+          phase.current = 'pausing';
+          timer.current = setTimeout(tick, 2000);
+        } else {
+          timer.current = setTimeout(tick, 90 + Math.random() * 40);
+        }
+        break;
+
+      case 'pausing':
+        phase.current = 'deleting';
+        timer.current = setTimeout(tick, 30);
+        break;
+
+      case 'deleting':
+        charIdx.current--;
+        setText(current.slice(0, charIdx.current));
+        if (charIdx.current <= 0) {
+          phase.current = 'waiting';
+          timer.current = setTimeout(tick, 400);
+        } else {
+          timer.current = setTimeout(tick, 35);
+        }
+        break;
+
+      case 'waiting':
+        roleIdx.current = (roleIdx.current + 1) % roles.length;
+        phase.current = 'typing';
+        timer.current = setTimeout(tick, 100);
+        break;
+    }
+  }, []);
 
   useEffect(() => {
-    const currentRole = roles[roleIndex];
-    const timeout = setTimeout(
-      () => {
-        if (!isDeleting) {
-          setText(currentRole.slice(0, text.length + 1));
-          if (text.length + 1 === currentRole.length) {
-            setTimeout(() => setIsDeleting(true), 1500);
-          }
-        } else {
-          setText(currentRole.slice(0, text.length - 1));
-          if (text.length === 0) {
-            setIsDeleting(false);
-            setRoleIndex((prev) => (prev + 1) % roles.length);
-          }
-        }
-      },
-      isDeleting ? 40 : 80
-    );
-    return () => clearTimeout(timeout);
-  }, [text, isDeleting, roleIndex]);
+    timer.current = setTimeout(tick, 500);
+    return () => clearTimeout(timer.current);
+  }, [tick]);
+
+  // Separate cursor blink so it doesn't interfere with typing
+  useEffect(() => {
+    const blink = setInterval(() => setCursorVisible((v) => !v), 530);
+    return () => clearInterval(blink);
+  }, []);
 
   return (
     <section
@@ -55,7 +86,7 @@ function Hero() {
           style={{ animationDelay: '0.2s' }}
         >
           <span>{text}</span>
-          <span className="inline-block w-0.5 h-6 sm:h-7 md:h-8 bg-primary-500 ml-1 animate-pulse align-middle" />
+          <span className={`inline-block w-0.5 h-6 sm:h-7 md:h-8 bg-primary-500 ml-1 align-middle transition-opacity duration-100 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`} />
         </h2>
         <p
           className="max-w-2xl mx-auto text-gray-600 dark:text-gray-400 text-lg mb-10 animate-slide-up leading-relaxed"
