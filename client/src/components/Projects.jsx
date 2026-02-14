@@ -66,7 +66,9 @@ const fallbackProjects = [
   },
 ];
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
+const API_URL =
+  process.env.REACT_APP_API_URL ||
+  `${window.location.protocol}//${window.location.hostname}:5001`;
 
 function Projects() {
   const [projects, setProjects] = useState([]);
@@ -74,19 +76,25 @@ function Projects() {
   const [titleRef, titleVisible] = useScrollAnimation();
 
   useEffect(() => {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
+
     async function fetchProjects() {
       try {
-        const res = await fetch(`${API_URL}/api/projects`);
+        const res = await fetch(`${API_URL}/api/projects`, { signal: controller.signal });
         if (!res.ok) throw new Error('Failed to fetch');
         const data = await res.json();
         setProjects(data.length > 0 ? data : fallbackProjects);
       } catch {
         setProjects(fallbackProjects);
       } finally {
+        clearTimeout(timeout);
         setLoading(false);
       }
     }
     fetchProjects();
+
+    return () => { clearTimeout(timeout); controller.abort(); };
   }, []);
 
   return (

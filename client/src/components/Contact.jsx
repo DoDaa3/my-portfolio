@@ -23,11 +23,17 @@ function Contact() {
     setStatus({ type: '', message: '' });
 
     try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 10000);
+
       const res = await fetch(`${API_URL}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
+        signal: controller.signal,
       });
+
+      clearTimeout(timeout);
 
       const data = await res.json();
 
@@ -37,8 +43,11 @@ function Contact() {
       } else {
         setStatus({ type: 'error', message: data.error || 'Something went wrong.' });
       }
-    } catch {
-      setStatus({ type: 'error', message: 'Network error. Please try again later.' });
+    } catch (err) {
+      const msg = err.name === 'AbortError'
+        ? 'Request timed out. Please check your connection and try again.'
+        : 'Network error. Please try again later.';
+      setStatus({ type: 'error', message: msg });
     } finally {
       setSubmitting(false);
     }
