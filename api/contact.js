@@ -29,10 +29,7 @@ module.exports = async function handler(req, res) {
     const contact = new Contact({ name, email, message });
     await contact.save();
 
-    // Respond immediately
-    res.status(201).json({ message: 'Message sent successfully' });
-
-    // Send email in the background
+    // Send email before responding (Vercel kills the function after res is sent)
     const emailConfigured =
       process.env.EMAIL_USER &&
       process.env.EMAIL_PASS &&
@@ -47,19 +44,25 @@ module.exports = async function handler(req, res) {
         },
       });
 
-      transporter.sendMail({
-        from: process.env.EMAIL_USER,
-        to: process.env.EMAIL_USER,
-        replyTo: email,
-        subject: `Portfolio Contact: ${name}`,
-        text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
-        html: `<h3>New Contact Form Submission</h3>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Message:</strong></p>
-          <p>${message}</p>`,
-      }).catch((err) => console.error('Email send error:', err));
+      try {
+        await transporter.sendMail({
+          from: process.env.EMAIL_USER,
+          to: process.env.EMAIL_USER,
+          replyTo: email,
+          subject: `Portfolio Contact: ${name}`,
+          text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+          html: `<h3>New Contact Form Submission</h3>
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Message:</strong></p>
+            <p>${message}</p>`,
+        });
+      } catch (emailErr) {
+        console.error('Email send error:', emailErr);
+      }
     }
+
+    res.status(201).json({ message: 'Message sent successfully' });
   } catch (err) {
     if (err.name === 'ValidationError') {
       const messages = Object.values(err.errors).map((e) => e.message);
