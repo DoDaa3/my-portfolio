@@ -29,16 +29,23 @@ function Contact() {
         body: JSON.stringify(formData),
       });
 
-      const data = await res.json();
-
-      if (res.ok) {
-        setStatus({ type: 'success', message: 'Message sent successfully! I\'ll get back to you soon.' });
-        setFormData({ name: '', email: '', message: '' });
+      if (!res.ok) {
+        const text = await res.text();
+        let errorMsg = 'Something went wrong.';
+        try {
+          const data = JSON.parse(text);
+          errorMsg = data.error || errorMsg;
+        } catch {
+          errorMsg = `Server error (${res.status}). Please try again later.`;
+        }
+        setStatus({ type: 'error', message: errorMsg });
       } else {
-        setStatus({ type: 'error', message: data.error || 'Something went wrong.' });
+        const data = await res.json();
+        setStatus({ type: 'success', message: data.message || 'Message sent successfully! I\'ll get back to you soon.' });
+        setFormData({ name: '', email: '', message: '' });
       }
-    } catch {
-      setStatus({ type: 'error', message: 'Network error. Please try again later.' });
+    } catch (err) {
+      setStatus({ type: 'error', message: `Network error: ${err.message}. Please try again later.` });
     } finally {
       setSubmitting(false);
     }
