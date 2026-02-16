@@ -45,17 +45,35 @@ const experiences = [
   },
 ];
 
-function ExperienceCard({ experience, index }) {
+function ExperienceCard({ experience, index, isLast }) {
   const [ref, isVisible] = useScrollAnimation(0.1);
 
   return (
     <div
       ref={ref}
-      className={`scroll-hidden ${isVisible ? 'scroll-visible' : ''}`}
+      className={`relative pl-10 ${!isLast ? 'pb-6' : ''} scroll-hidden ${isVisible ? 'scroll-visible' : ''}`}
       style={{ transitionDelay: `${index * 150}ms` }}
     >
+      {/* Timeline line segment */}
+      {!isLast && (
+        <div className="absolute left-[5px] top-[18px] bottom-0 w-[2px] bg-gradient-to-b from-primary-300 to-primary-200 dark:from-primary-600 dark:to-primary-800" />
+      )}
+
+      {/* Timeline dot */}
+      <div className="absolute left-0 top-[10px] z-10">
+        {experience.current ? (
+          <div className="relative flex items-center justify-center w-3 h-3">
+            <span className="absolute inline-flex h-full w-full rounded-full bg-primary-400 dark:bg-primary-500 opacity-75 animate-ping" />
+            <span className="relative inline-flex w-3 h-3 rounded-full bg-primary-500 dark:bg-primary-400 ring-[3px] ring-primary-100 dark:ring-primary-900/50" />
+          </div>
+        ) : (
+          <div className="w-3 h-3 rounded-full bg-primary-400 dark:bg-primary-500 ring-[3px] ring-gray-50 dark:ring-gray-900" />
+        )}
+      </div>
+
+      {/* Card */}
       <div className="relative bg-white dark:bg-gray-800/50 rounded-xl p-6 border border-gray-100 dark:border-gray-800 hover:shadow-lg hover:border-primary-200 dark:hover:border-primary-900/50 transition-all duration-300">
-        {/* Current indicator */}
+        {/* Current badge */}
         {experience.current && (
           <div className="absolute top-0 left-6 -translate-y-1/2">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-full bg-primary-500 text-white shadow-sm">
@@ -140,9 +158,9 @@ function Experience() {
           <span className="text-primary-600 dark:text-primary-400">Experience</span>
         </h2>
 
-        <div className="max-w-3xl mx-auto space-y-6">
+        <div className="max-w-3xl mx-auto">
           {experiences.map((exp, i) => (
-            <ExperienceCard key={exp.company} experience={exp} index={i} />
+            <ExperienceCard key={exp.company} experience={exp} index={i} isLast={i === experiences.length - 1} />
           ))}
         </div>
       </div>
