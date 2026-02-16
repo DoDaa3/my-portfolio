@@ -57,18 +57,19 @@ function About() {
             className={`scroll-hidden-right ${bioVisible ? 'scroll-visible-x' : ''}`}
           >
             <h3 className="text-2xl font-semibold mb-4">
-              A passionate developer based in Casablanca, Morocco
+              A frontend developer based in Casablanca, Morocco
             </h3>
             <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-              I'm a full-stack developer with 3+ years of experience building
-              web applications. I specialize in the MERN stack and love creating
-              intuitive, performant user interfaces.
+              I'm a frontend developer with 3+ years of experience building
+              modern web applications. I specialize in React.js, Next.js, and
+              Tailwind CSS — turning Figma designs into responsive, accessible,
+              and performant interfaces.
             </p>
             <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
-              When I'm not coding, you can find me exploring new technologies,
-              contributing to open-source projects, or writing technical blog
-              posts. I believe in continuous learning and building products that
-              make a difference.
+              I've worked on diverse projects — from healthcare platforms and
+              content creation tools to nonprofit websites and Slack bot dashboards.
+              Whether full-time or freelance, I focus on writing clean code and
+              delivering great user experiences.
             </p>
 
             <div

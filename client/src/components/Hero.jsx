@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 
-const roles = ['Full Stack Developer', 'MERN Specialist', 'UI/UX Enthusiast', 'Problem Solver'];
+const roles = ['Frontend Developer', 'React Specialist', 'UI/UX Enthusiast', 'Freelancer'];
 
 function Hero() {
   const [text, setText] = useState('');
@@ -92,9 +92,9 @@ function Hero() {
           className="max-w-2xl mx-auto text-gray-600 dark:text-gray-400 text-lg mb-10 animate-slide-up leading-relaxed"
           style={{ animationDelay: '0.4s' }}
         >
-          I build modern, responsive web applications with clean code and great
-          user experiences. Passionate about turning ideas into reality through
-          technology.
+          I build modern, responsive web applications with React.js, Next.js, and
+          Tailwind CSS. From healthcare platforms to content creation tools,
+          I turn designs into polished, performant user experiences.
         </p>
         <div
           className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up"
