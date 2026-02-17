@@ -9,6 +9,7 @@ const testimonials = [
     quote:
       'Omar is a talented frontend engineer with a keen eye for design and a proactive mindset. He not only builds clean, well-crafted interfaces but also suggests valuable improvements that enhance user experience. A great collaborator and problem solver—highly recommended!',
     linkedIn: 'https://www.linkedin.com/in/omar-amine-460807207/',
+    avatar: '/images/el mahdi karami.jpeg',
     date: 'March 2025',
   },
 ];
@@ -53,14 +54,22 @@ function TestimonialCard({ testimonial, index }) {
               {/* Avatar with gradient ring */}
               <div className="relative">
                 <div className="absolute -inset-1 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full opacity-75" />
-                <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/40 dark:to-primary-800/40 flex items-center justify-center border-2 border-white dark:border-gray-800">
-                  <span className="text-primary-600 dark:text-primary-300 font-bold text-xl sm:text-2xl">
-                    {testimonial.name
-                      .split(' ')
-                      .map((n) => n[0])
-                      .join('')}
-                  </span>
-                </div>
+                {testimonial.avatar ? (
+                  <img
+                    src={testimonial.avatar}
+                    alt={testimonial.name}
+                    className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-2 border-white dark:border-gray-800"
+                  />
+                ) : (
+                  <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/40 dark:to-primary-800/40 flex items-center justify-center border-2 border-white dark:border-gray-800">
+                    <span className="text-primary-600 dark:text-primary-300 font-bold text-xl sm:text-2xl">
+                      {testimonial.name
+                        .split(' ')
+                        .map((n) => n[0])
+                        .join('')}
+                    </span>
+                  </div>
+                )}
               </div>
               <div className="text-left sm:text-center">
                 <h4 className="font-bold text-gray-900 dark:text-white text-lg">
