@@ -5,6 +5,7 @@ const About = lazy(() => import('../components/About'));
 const Experience = lazy(() => import('../components/Experience'));
 const Skills = lazy(() => import('../components/Skills'));
 const Projects = lazy(() => import('../components/Projects'));
+const Testimonials = lazy(() => import('../components/Testimonials'));
 const Contact = lazy(() => import('../components/Contact'));
 
 function Home() {
@@ -16,6 +17,7 @@ function Home() {
         <Experience />
         <Skills />
         <Projects />
+        <Testimonials />
         <Contact />
       </Suspense>
     </>
