@@ -78,9 +78,9 @@ function About() {
             >
               {[
                 { value: '3+', label: 'Years Experience' },
-                { value: '20+', label: 'Projects Completed' },
-                { value: '10+', label: 'Happy Clients' },
-                { value: '5+', label: 'Open Source' },
+                { value: '10+', label: 'Projects Completed' },
+                { value: '5+', label: 'Happy Clients' },
+                { value: '2+', label: 'Open Source' },
               ].map((stat, i) => (
                 <div
                   key={stat.label}
