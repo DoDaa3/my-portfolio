@@ -12,6 +12,17 @@ const testimonials = [
     avatar: '/images/el mahdi karami.jpeg',
     date: 'March 2025',
   },
+  {
+    name: 'Meryem Benmezouara',
+    role: 'Software Engineer',
+    company: 'Metaverse',
+    relationship: 'Worked with Omar at Metaverse',
+    quote:
+      'I had the pleasure of working alongside Omar, and I can confidently say he is one of the most talented and dedicated developers I have met. His deep expertise in React.js and frontend development, combined with his problem-solving skills, makes him an invaluable asset to any team. Omar has a remarkable ability to write clean, efficient code while also thinking about the bigger picture—whether it\'s optimizing performance, improving user experience, or mentoring others. Beyond his technical skills, he is a fantastic collaborator who brings positive energy to every project. Any team would be lucky to have him!',
+    linkedIn: 'https://www.linkedin.com/in/omar-amine-460807207/',
+    avatar: '/images/meryem benmezouara.jpeg',
+    date: 'February 2025',
+  },
 ];
 
 function StarRating() {
