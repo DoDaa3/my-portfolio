@@ -61,7 +61,7 @@ function TestimonialCard({ testimonial, index }) {
 
           <div className="flex flex-col sm:flex-row gap-6 sm:gap-8">
             {/* Left side — Author info */}
-            <div className="flex sm:flex-col items-center sm:items-center gap-4 sm:gap-3 sm:min-w-[140px] sm:pt-2">
+            <div className="flex sm:flex-col items-center sm:items-center gap-4 sm:gap-3 sm:w-[160px] sm:shrink-0 sm:pt-2">
               {/* Avatar with gradient ring */}
               <div className="relative">
                 <div className="absolute -inset-1 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full opacity-75" />
