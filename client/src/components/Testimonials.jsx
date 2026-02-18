@@ -21,7 +21,7 @@ const testimonials = [
       'I had the opportunity to collaborate with Omar Amine on a project as a Frontend Developer. He is technically strong, detail-oriented, and highly collaborative. Omar delivers clean, efficient code and consistently contributes to creating engaging digital experiences. A great team player and a valuable asset to any tech team.',
     linkedIn: 'https://www.linkedin.com/in/omar-amine-460807207/',
     avatar: '/images/meryem benmezouara.jpeg',
-    date: 'February 2025',
+    date: 'February 2026',
   },
 ];
 
