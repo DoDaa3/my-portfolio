@@ -18,7 +18,7 @@ const projects = [
     title: 'Hey Tajine',
     description:
       'A Slack bot with a dedicated landing page, designed to enhance team communication and workflow automation within Slack workspaces.',
-    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f2?w=600&h=400&fit=crop',
+    image: 'https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=600&h=400&fit=crop',
     techStack: ['HTML', 'Tailwind CSS', 'JavaScript'],
     liveUrl: 'https://hey-tajine-frontend.vercel.app/',
     githubUrl: '',
