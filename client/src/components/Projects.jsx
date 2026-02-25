@@ -6,16 +6,6 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation';
 const fallbackProjects = [
   {
     _id: '1',
-    title: 'E-Commerce Platform',
-    description:
-      'A full-stack e-commerce application with user authentication, product catalog, shopping cart, and payment integration using Stripe.',
-    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop',
-    techStack: ['React', 'Node.js', 'MongoDB', 'Stripe', 'Redux'],
-    liveUrl: 'https://example.com',
-    githubUrl: 'https://github.com',
-  },
-  {
-    _id: '2',
     title: 'Task Management App',
     description:
       'A collaborative task management tool with real-time updates, drag-and-drop kanban boards, and team workspace features.',
@@ -25,44 +15,22 @@ const fallbackProjects = [
     githubUrl: 'https://github.com/DoDaa3/todo-app',
   },
   {
+    _id: '2',
+    title: 'Hey Tajine',
+    description:
+      'A Slack bot with a dedicated landing page, designed to enhance team communication and workflow automation within Slack workspaces.',
+    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f2?w=600&h=400&fit=crop',
+    techStack: ['HTML', 'Tailwind CSS', 'JavaScript'],
+    liveUrl: 'https://hey-tajine-frontend.vercel.app/',
+  },
+  {
     _id: '3',
-    title: 'Weather Dashboard',
+    title: 'Ummaty',
     description:
-      'A responsive weather dashboard that displays current conditions, forecasts, and interactive maps using the OpenWeatherMap API.',
-    image: 'https://images.unsplash.com/photo-1592210454359-9043f067919b?w=600&h=400&fit=crop',
-    techStack: ['React', 'Chart.js', 'OpenWeatherMap API', 'CSS3'],
-    liveUrl: 'https://example.com',
-    githubUrl: 'https://github.com',
-  },
-  {
-    _id: '4',
-    title: 'Social Media Analytics',
-    description:
-      'A data visualization platform that aggregates social media metrics and presents insights through interactive charts and dashboards.',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop',
-    techStack: ['React', 'D3.js', 'Node.js', 'MongoDB'],
-    liveUrl: 'https://example.com',
-    githubUrl: 'https://github.com',
-  },
-  {
-    _id: '5',
-    title: 'AI Chat Application',
-    description:
-      'An AI-powered chat application with natural language processing, conversation history, and multiple AI model support.',
-    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop',
-    techStack: ['Next.js', 'OpenAI API', 'Tailwind CSS', 'Prisma'],
-    liveUrl: 'https://example.com',
-    githubUrl: 'https://github.com',
-  },
-  {
-    _id: '6',
-    title: 'Fitness Tracker',
-    description:
-      'A mobile-first fitness tracking app with workout logging, progress charts, goal setting, and social sharing capabilities.',
-    image: 'https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=600&h=400&fit=crop',
-    techStack: ['React Native', 'Firebase', 'Redux', 'Chart.js'],
-    liveUrl: 'https://example.com',
-    githubUrl: 'https://github.com',
+      'A charity website landing page built to connect people with charitable causes and make giving back to the community more accessible.',
+    image: 'https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=600&h=400&fit=crop',
+    techStack: ['HTML', 'Tailwind CSS', 'React'],
+    liveUrl: 'https://image-grid-ten.vercel.app/',
   },
 ];
 
@@ -108,7 +76,7 @@ function Projects() {
 
         {loading ? (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[...Array(6)].map((_, i) => (
+            {[...Array(3)].map((_, i) => (
               <div
                 key={i}
                 className="bg-white dark:bg-gray-800/50 rounded-xl overflow-hidden shadow-sm animate-pulse"
