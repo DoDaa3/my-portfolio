@@ -21,8 +21,8 @@ const fallbackProjects = [
       'A collaborative task management tool with real-time updates, drag-and-drop kanban boards, and team workspace features.',
     image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop',
     techStack: ['React', 'Socket.io', 'Express', 'PostgreSQL'],
-    liveUrl: 'https://example.com',
-    githubUrl: 'https://github.com',
+    liveUrl: 'https://kanban-client-amber.vercel.app',
+    githubUrl: 'https://github.com/DoDaa3/todo-app',
   },
   {
     _id: '3',
