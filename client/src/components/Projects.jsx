@@ -85,7 +85,7 @@ function Projects() {
         </h2>
 
         {loading ? (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 gap-6">
             {[...Array(4)].map((_, i) => (
               <div
                 key={i}
@@ -105,7 +105,7 @@ function Projects() {
             ))}
           </div>
         ) : (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 gap-6">
             {projects.map((project, i) => (
               <ProjectCard key={project._id} project={project} index={i} />
             ))}
