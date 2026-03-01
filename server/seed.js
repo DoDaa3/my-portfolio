@@ -36,6 +36,17 @@ const projects = [
     featured: true,
     order: 3,
   },
+  {
+    title: 'AI Content Studio',
+    description:
+      'An AI-powered content generation platform built with Next.js and Google Gemini, featuring authentication via Supabase, real-time markdown rendering, and a polished animated UI.',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop',
+    techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Supabase', 'Gemini AI', 'React Query'],
+    liveUrl: 'https://ai-content-studio-zeta-gules.vercel.app/',
+    githubUrl: 'https://github.com/DoDaa3/ai-content-studio',
+    featured: true,
+    order: 4,
+  },
 ];
 
 async function seed() {
