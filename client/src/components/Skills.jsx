@@ -7,7 +7,9 @@ const skillCategories = [
     skills: [
       { name: 'React.js', color: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300' },
       { name: 'Next.js', color: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300' },
+      { name: 'TypeScript', color: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300' },
       { name: 'JavaScript', color: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300' },
+      { name: 'React Query', color: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300' },
       { name: 'HTML5', color: 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300' },
       { name: 'CSS3', color: 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-300' },
       { name: 'Tailwind CSS', color: 'bg-cyan-100 text-cyan-800 dark:bg-cyan-900/30 dark:text-cyan-300' },
@@ -20,8 +22,11 @@ const skillCategories = [
     skills: [
       { name: 'Node.js', color: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300' },
       { name: 'Express', color: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300' },
+      { name: 'Socket.io', color: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300' },
       { name: 'REST APIs', color: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300' },
       { name: 'MongoDB', color: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300' },
+      { name: 'PostgreSQL', color: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300' },
+      { name: 'Supabase', color: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300' },
       { name: 'AWS S3', color: 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300' },
     ],
   },
