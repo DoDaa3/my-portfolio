@@ -85,8 +85,8 @@ function Projects() {
         </h2>
 
         {loading ? (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[...Array(3)].map((_, i) => (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[...Array(4)].map((_, i) => (
               <div
                 key={i}
                 className="bg-white dark:bg-gray-800/50 rounded-xl overflow-hidden shadow-sm animate-pulse"
@@ -105,7 +105,7 @@ function Projects() {
             ))}
           </div>
         ) : (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {projects.map((project, i) => (
               <ProjectCard key={project._id} project={project} index={i} />
             ))}
