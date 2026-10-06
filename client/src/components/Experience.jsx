@@ -43,6 +43,15 @@ const experiences = [
     ],
     skills: ['React.js', 'Next.js', 'Tailwind CSS', 'Fabric.js', 'Git', 'AWS S3'],
   },
+  {
+    role: 'Full Stack Engineer',
+    type: 'Full-time',
+    company: "Student's Mind",
+    period: 'Dec 2020 — Feb 2021',
+    description:
+      'Developed a comprehensive school management system using Python, Qt Designer, and MySQL. Built features for student registration, grade entry, and employee attendance tracking, ensuring seamless record management and efficient educational processes.',
+    skills: ['Python', 'Qt Designer', 'MySQL'],
+  },
 ];
 
 function ExperienceCard({ experience, index, isLast }) {
@@ -90,13 +99,15 @@ function ExperienceCard({ experience, index, isLast }) {
               <h3 className="text-lg font-bold text-gray-900 dark:text-white">
                 {experience.role}
               </h3>
-              <span className={`px-2.5 py-0.5 text-xs font-semibold rounded-full ${
-                experience.type === 'Full-time'
-                  ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300'
-                  : 'bg-primary-100 text-primary-700 dark:bg-primary-900/30 dark:text-primary-300'
-              }`}>
-                {experience.type}
-              </span>
+              {experience.type && (
+                <span className={`px-2.5 py-0.5 text-xs font-semibold rounded-full ${
+                  experience.type === 'Full-time'
+                    ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300'
+                    : 'bg-primary-100 text-primary-700 dark:bg-primary-900/30 dark:text-primary-300'
+                }`}>
+                  {experience.type}
+                </span>
+              )}
             </div>
             <p className="text-primary-600 dark:text-primary-400 font-semibold">
               {experience.company}
@@ -104,7 +115,7 @@ function ExperienceCard({ experience, index, isLast }) {
           </div>
           <div className="text-sm text-gray-500 dark:text-gray-400 sm:text-right shrink-0">
             <p className="font-medium">{experience.period}</p>
-            <p>{experience.location}</p>
+            {experience.location && <p>{experience.location}</p>}
           </div>
         </div>
 
@@ -118,10 +129,10 @@ function ExperienceCard({ experience, index, isLast }) {
           <div className="space-y-3 mb-4">
             {experience.projects.map((project) => (
               <div key={project.name} className="pl-4 border-l-2 border-primary-200 dark:border-primary-800">
-                <h4 className="font-semibold text-gray-900 dark:text-white text-sm mb-1">
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-1">
                   {project.name}
                 </h4>
-                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
                   {project.description}
                 </p>
               </div>
