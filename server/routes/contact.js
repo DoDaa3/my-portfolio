@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const nodemailer = require('nodemailer');
+const { contactEmail } = require('../../api/_lib/emailTemplate');
 const Contact = require('../models/Contact');
 
 // Only create transporter if real credentials are configured
@@ -40,13 +41,7 @@ router.post('/', async (req, res) => {
         from: process.env.EMAIL_USER,
         to: process.env.EMAIL_USER,
         replyTo: email,
-        subject: `Portfolio Contact: ${name}`,
-        text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
-        html: `<h3>New Contact Form Submission</h3>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Message:</strong></p>
-          <p>${message}</p>`,
+        ...contactEmail({ name, email, message }),
       }).catch((err) => console.error('Email send error:', err));
     }
   } catch (err) {

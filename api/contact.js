@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
+const { contactEmail } = require('./_lib/emailTemplate');
 const connectDB = require('./_lib/db');
 
 // Define schema inline to avoid model recompilation in serverless
@@ -49,13 +50,7 @@ module.exports = async function handler(req, res) {
           from: process.env.EMAIL_USER,
           to: process.env.EMAIL_USER,
           replyTo: email,
-          subject: `Portfolio Contact: ${name}`,
-          text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
-          html: `<h3>New Contact Form Submission</h3>
-            <p><strong>Name:</strong> ${name}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Message:</strong></p>
-            <p>${message}</p>`,
+          ...contactEmail({ name, email, message }),
         });
       } catch (emailErr) {
         console.error('Email send error:', emailErr);
