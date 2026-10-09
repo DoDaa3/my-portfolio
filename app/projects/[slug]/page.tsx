@@ -93,12 +93,15 @@ export default async function CaseStudyPage({ params }: PageProps) {
             {study.tagline}
           </p>
 
-          <dl className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
+          <dl className={`grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8 ${study.meta.team ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`}>
             {[
               ['Role', study.meta.role],
               ['Timeline', study.meta.timeline],
               ['Type', study.meta.type],
-            ].map(([label, value]) => (
+              ['Team', study.meta.team],
+            ]
+              .filter((item): item is [string, string] => Boolean(item[1]))
+              .map(([label, value]) => (
               <div
                 key={label}
                 className="p-4 rounded-lg bg-gray-50 dark:bg-gray-900 border border-gray-100 dark:border-gray-800"
@@ -134,21 +137,9 @@ export default async function CaseStudyPage({ params }: PageProps) {
             )}
           </div>
 
-          {study.demoLogin && (
-            <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
-              Try it without signing up:{' '}
-              <code className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
-                {study.demoLogin.email}
-              </code>{' '}
-              /{' '}
-              <code className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
-                {study.demoLogin.password}
-              </code>
-            </p>
-          )}
         </header>
 
-        <Figure image={study.cover} priority />
+        {study.cover && <Figure image={study.cover} priority />}
 
         <div className="mt-16 space-y-16">
           {/* Overview */}
@@ -232,7 +223,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
 
           {/* Next */}
           <section>
-            <SectionHeading>What&apos;s next</SectionHeading>
+            <SectionHeading>{study.nextHeading ?? "What's next"}</SectionHeading>
             <ul className="space-y-3">
               {study.next.map((item) => (
                 <li key={item} className="flex gap-3 text-gray-700 dark:text-gray-300">

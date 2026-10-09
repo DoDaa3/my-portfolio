@@ -14,18 +14,19 @@ export interface CaseStudy {
   projectTitle: string;
   title: string;
   tagline: string;
-  meta: { role: string; timeline: string; type: string };
+  meta: { role: string; timeline: string; type: string; team?: string };
   stack: string[];
   liveUrl?: string;
   githubUrl?: string;
-  demoLogin?: { email: string; password: string };
-  cover: CaseStudyImage;
+  cover?: CaseStudyImage;
   overview: string[];
   features: string[];
   decisions: { title: string; body: string }[];
   challenge: { title: string; body: string[] };
   gallery: CaseStudyImage[];
   next: string[];
+  /** Heading for `next`; defaults to "What's next" */
+  nextHeading?: string;
 }
 
 export const caseStudies: CaseStudy[] = [
@@ -55,7 +56,6 @@ export const caseStudies: CaseStudy[] = [
     ],
     liveUrl: 'https://kanban-client-amber.vercel.app',
     githubUrl: 'https://github.com/DoDaa3/todo-app',
-    demoLogin: { email: 'demo@kanban.app', password: 'demo1234' },
     cover: {
       src: '/images/projects/task-management.webp',
       alt: 'FlowBoard Kanban board with To Do, In Progress, In Review and Done columns',
@@ -195,6 +195,114 @@ export const caseStudies: CaseStudy[] = [
       'Image generation to pair visuals with written content',
       'Diagram generation for technical posts and docs',
       'More content types and team workspaces',
+    ],
+  },
+  {
+    slug: 'fcn4u',
+    projectTitle: 'FCN4U',
+    title: 'FCN4U',
+    tagline: 'A Photoshop-style editor in the browser that lets creators design a YouTube-like thumbnail for every post.',
+    meta: {
+      role: 'UI designer & frontend developer',
+      timeline: 'At Metaverse, 2022 – 2024',
+      type: 'Client project (launched)',
+      team: '2 designers, 5–6 frontend devs, 1 backend dev',
+    },
+    stack: ['React', 'Next.js', 'Tailwind CSS', 'Fabric.js', 'Figma'],
+    overview: [
+      'FCN4U is a content platform where every post needs a strong featured image. Instead of sending creators to an external design tool, we built one right into the product.',
+      'I worked on both sides of it: as one of the two designers I helped shape the interface in Figma, and as one of the frontend developers I built the thumbnail editor itself.',
+    ],
+    features: [
+      'Add and edit text with fonts, colors and styling',
+      'Upload and place images on the canvas',
+      'Draw shapes and arrows to highlight what matters',
+      'Shadows and visual effects on any element',
+      'A layer system to reorder, show and hide elements',
+      'Export the finished design as the post’s featured image',
+    ],
+    decisions: [
+      {
+        title: 'Build the editor instead of buying one',
+        body: 'No existing editor library covered everything we needed (text, images, shapes, arrows, shadows and layers working together), so I built the editing experience from scratch: the tools, the controls and the way elements behave on the canvas.',
+      },
+      {
+        title: 'Designing what I build',
+        body: 'Being both a designer and a developer on the team meant I could design the editor’s interface in Figma and then implement it myself, so details didn’t get lost between design and code.',
+      },
+      {
+        title: 'Fast pages with server-side rendering',
+        body: 'The platform runs on Next.js, and server-side rendering kept pages quick to load and easy for search engines to index.',
+      },
+    ],
+    challenge: {
+      title: 'No library did everything',
+      body: [
+        'The hardest part was that the tool we wanted didn’t exist. Every library I evaluated was missing something: layers, arrows, shadows, or the flexibility to combine them the way creators expected.',
+        'Building it from scratch meant designing how every element is created, selected, moved, styled and stacked, and making all of it feel as natural as a desktop design app.',
+      ],
+    },
+    gallery: [],
+    nextHeading: 'Outcome',
+    next: [
+      'FCN4U launched while the team kept shipping new features on top of it.',
+    ],
+  },
+  {
+    slug: 'bimohealth',
+    projectTitle: 'BimoHealth',
+    title: 'BimoHealth',
+    tagline: 'An online mental health platform that lets patients find a doctor, book a session and meet them by video.',
+    meta: {
+      role: 'Frontend developer',
+      timeline: 'At Metaverse, 2022 – 2024',
+      type: 'Client project, South Africa (launched)',
+      team: '1 frontend dev (me) + 1 backend dev',
+    },
+    stack: ['React', 'Tailwind CSS', 'AWS S3', 'Figma'],
+    cover: {
+      src: '/images/projects/bimo-health.webp',
+      alt: 'BimoHealth landing page: What is Mental Health?',
+      width: 1200,
+      height: 564,
+    },
+    overview: [
+      'BimoHealth is a mental health consultation platform built for a client in South Africa, where stigma and limited access to services keep many people from getting help.',
+      'I was the frontend developer, turning the Figma designs into the full product and working directly with one backend developer. My main features were appointment booking between patients and doctors, and the video consultations.',
+    ],
+    features: [
+      'Doctor search for patients',
+      'Appointment booking between patients and doctors',
+      'Video consultations inside the platform',
+      'Interactive mental health assessments',
+      'Secure image uploads stored on AWS S3',
+      'Responsive UI built from the Figma designs',
+    ],
+    decisions: [
+      {
+        title: 'Booking built around both sides',
+        body: 'A booking flow has two users with different needs: patients want to find a suitable doctor and a time quickly, and doctors need a clear view of their sessions. I built the booking screens to keep both journeys simple.',
+      },
+      {
+        title: 'Video calls inside the product',
+        body: 'Consultations happen in the platform itself, so patients never have to install anything or share contact details to talk to a doctor.',
+      },
+      {
+        title: 'A small team, owning the whole frontend',
+        body: 'With one backend developer and me on the frontend, I owned every screen end to end, from Figma to production, and also contributed to authentication and S3 storage for secure uploads.',
+      },
+    ],
+    challenge: {
+      title: 'Integrating the video calls',
+      body: [
+        'The hardest part was integrating video calls: connecting a patient and a doctor in a live session from a booked appointment, inside the browser.',
+        'Some weeks we got blocked by new challenges, but we kept the client in the loop, and they were happy with both the result and the progress along the way.',
+      ],
+    },
+    gallery: [],
+    nextHeading: 'Outcome',
+    next: [
+      'BimoHealth launched, and the client was happy with the project.',
     ],
   },
 ];

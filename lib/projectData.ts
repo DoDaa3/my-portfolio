@@ -58,9 +58,16 @@ export const fallbackProjects: Project[] = [
     _id: '5',
     title: 'BimoHealth',
     description:
-      'An online mental health consultation platform with interactive mental health assessments, responsive UI components, secure authentication, and S3-backed image uploads.',
+      'An online mental health platform for a South African client: doctor search, appointment booking, video consultations and interactive assessments.',
     image: '/images/projects/bimo-health.webp',
     imagePosition: 'bottom',
     techStack: ['React', 'Tailwind CSS', 'AWS S3'],
+  },
+  {
+    _id: '6',
+    title: 'FCN4U',
+    description:
+      'A Photoshop-style thumbnail editor built into a content platform: text, images, shapes, arrows, shadows and layers.',
+    techStack: ['React', 'Next.js', 'Tailwind CSS', 'Fabric.js'],
   },
 ];
