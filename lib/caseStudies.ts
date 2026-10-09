@@ -224,7 +224,7 @@ export const caseStudies: CaseStudy[] = [
     decisions: [
       {
         title: 'Build the editor instead of buying one',
-        body: 'No existing editor library covered everything we needed (text, images, shapes, arrows, shadows and layers working together), so I built the editing experience from scratch: the tools, the controls and the way elements behave on the canvas.',
+        body: 'No existing editor library covered everything we needed (text, images, shapes, arrows, shadows and layers working together). Fabric.js handled a small part of the canvas work; everything else I built from scratch: the tools, the layer system, the controls and the way elements behave on the canvas.',
       },
       {
         title: 'Designing what I build',
@@ -239,7 +239,7 @@ export const caseStudies: CaseStudy[] = [
       title: 'No library did everything',
       body: [
         'The hardest part was that the tool we wanted didn’t exist. Every library I evaluated was missing something: layers, arrows, shadows, or the flexibility to combine them the way creators expected.',
-        'Building it from scratch meant designing how every element is created, selected, moved, styled and stacked, and making all of it feel as natural as a desktop design app.',
+        'Building most of it myself meant designing how every element is created, selected, moved, styled and stacked, and making all of it feel as natural as a desktop design app.',
       ],
     },
     gallery: [],
@@ -259,7 +259,7 @@ export const caseStudies: CaseStudy[] = [
       type: 'Client project, South Africa (launched)',
       team: '1 frontend dev (me) + 1 backend dev',
     },
-    stack: ['React', 'Tailwind CSS', 'AWS S3', 'Figma'],
+    stack: ['React', 'Tailwind CSS', 'Amazon Chime SDK', 'AWS S3', 'Figma'],
     cover: {
       src: '/images/projects/bimo-health.webp',
       alt: 'BimoHealth landing page: What is Mental Health?',
@@ -273,7 +273,7 @@ export const caseStudies: CaseStudy[] = [
     features: [
       'Doctor search for patients',
       'Appointment booking between patients and doctors',
-      'Video consultations inside the platform',
+      'Video consultations inside the platform, powered by the Amazon Chime SDK',
       'Interactive mental health assessments',
       'Secure image uploads stored on AWS S3',
       'Responsive UI built from the Figma designs',
@@ -285,7 +285,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         title: 'Video calls inside the product',
-        body: 'Consultations happen in the platform itself, so patients never have to install anything or share contact details to talk to a doctor.',
+        body: 'I integrated the Amazon Chime SDK so consultations happen in the platform itself. Patients never have to install anything or share contact details to talk to a doctor.',
       },
       {
         title: 'A small team, owning the whole frontend',
@@ -295,7 +295,7 @@ export const caseStudies: CaseStudy[] = [
     challenge: {
       title: 'Integrating the video calls',
       body: [
-        'The hardest part was integrating video calls: connecting a patient and a doctor in a live session from a booked appointment, inside the browser.',
+        'The hardest part was integrating video calls with the Amazon Chime SDK: connecting a patient and a doctor in a live session from a booked appointment, right in the browser, with the backend creating and managing each meeting.',
         'Some weeks we got blocked by new challenges, but we kept the client in the loop, and they were happy with both the result and the progress along the way.',
       ],
     },

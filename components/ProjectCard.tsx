@@ -33,10 +33,22 @@ function ProjectCard({ project, index = 0, className = '' }: ProjectCardProps) {
               className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
             />
           ) : (
-            <div className="w-full h-full bg-gradient-to-br from-primary-400 to-primary-700 flex items-center justify-center">
-              <svg className="w-16 h-16 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-              </svg>
+            // No screenshot (e.g. client work we can't show): a styled title card instead
+            <div className="relative w-full h-full bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 flex items-center justify-center group-hover:scale-110 transition-transform duration-700 ease-out">
+              <div
+                className="absolute inset-0 opacity-20"
+                style={{
+                  backgroundImage:
+                    'linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)',
+                  backgroundSize: '24px 24px',
+                }}
+              />
+              <div className="relative text-center px-6">
+                <p className="text-4xl font-extrabold tracking-tight text-white">{project.title}</p>
+                <p className="mt-2 text-xs font-medium uppercase tracking-widest text-primary-100/80">
+                  &lt;/&gt; Client project
+                </p>
+              </div>
             </div>
           )}
           {/* Overlay on hover */}

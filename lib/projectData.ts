@@ -61,7 +61,7 @@ export const fallbackProjects: Project[] = [
       'An online mental health platform for a South African client: doctor search, appointment booking, video consultations and interactive assessments.',
     image: '/images/projects/bimo-health.webp',
     imagePosition: 'bottom',
-    techStack: ['React', 'Tailwind CSS', 'AWS S3'],
+    techStack: ['React', 'Tailwind CSS', 'Amazon Chime SDK', 'AWS S3'],
   },
   {
     _id: '6',
