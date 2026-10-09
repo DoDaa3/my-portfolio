@@ -73,6 +73,13 @@ function Hero() {
       </div>
 
       <div className="container-max text-center relative z-10">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-green-500/30 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 text-sm font-medium animate-fade-in">
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75 motion-safe:animate-ping" />
+            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500" />
+          </span>
+          Open to new opportunities
+        </div>
         <p className="text-primary-600 dark:text-primary-400 font-medium mb-4 animate-fade-in tracking-wider uppercase text-sm">
           Hello, I'm
         </p>
@@ -122,6 +129,16 @@ function Hero() {
             className="px-8 py-3 border-2 border-primary-600 dark:border-primary-400 text-primary-600 dark:text-primary-400 hover:bg-primary-600 hover:text-white dark:hover:bg-primary-400 dark:hover:text-gray-900 rounded-lg font-medium transition-all duration-300 hover:-translate-y-0.5"
           >
             Contact Me
+          </a>
+          <a
+            href="/Omar-Amine-CV.pdf"
+            download="Omar-Amine-CV.pdf"
+            className="group px-8 py-3 border-2 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-primary-600 hover:text-primary-600 dark:hover:border-primary-400 dark:hover:text-primary-400 rounded-lg font-medium transition-all duration-300 hover:-translate-y-0.5 inline-flex items-center justify-center gap-2"
+          >
+            Download CV
+            <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v12m0 0l-5-5m5 5l5-5M4 20h16" />
+            </svg>
           </a>
         </div>
 

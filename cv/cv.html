@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<!--
+  Source for client/public/Omar-Amine-CV.pdf.
+  After editing, regenerate the PDF from the repo root:
+
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new \
+    --no-pdf-header-footer --print-to-pdf=client/public/Omar-Amine-CV.pdf "file://$PWD/cv/cv.html"
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Omar Amine — Frontend Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    @page { size: A4; margin: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #111827;
+      --muted: #4b5563;
+      --soft: #6b7280;
+      --accent: #2563eb;
+      --line: #e5e7eb;
+      --chip: #eff6ff;
+    }
+    html, body { width: 210mm; }
+    body {
+      font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+      color: var(--ink);
+      font-size: 9.3pt;
+      line-height: 1.42;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .page { padding: 11mm 14mm 8mm; }
+    a { color: inherit; text-decoration: none; }
+
+    /* Header */
+    header { display: flex; justify-content: space-between; align-items: flex-end; gap: 10mm; padding-bottom: 4mm; border-bottom: 2px solid var(--ink); }
+    h1 { font-size: 24pt; font-weight: 800; letter-spacing: -0.02em; line-height: 1; }
+    .role { margin-top: 2.5mm; font-size: 12pt; font-weight: 600; color: var(--accent); }
+    .contact { list-style: none; text-align: right; font-size: 8.8pt; color: var(--muted); line-height: 1.6; }
+    .contact a { color: var(--ink); font-weight: 500; }
+
+    .summary { margin-top: 3.5mm; color: var(--muted); font-size: 9.8pt; }
+
+    /* Sections */
+    section { margin-top: 4.2mm; }
+    h2 {
+      font-size: 8.6pt; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); padding-bottom: 1.5mm; margin-bottom: 2.4mm; border-bottom: 1px solid var(--line);
+    }
+
+    .item { margin-bottom: 3mm; break-inside: avoid; }
+    .item:last-child { margin-bottom: 0; }
+    .item-head { display: flex; justify-content: space-between; align-items: baseline; gap: 4mm; }
+    .item-title { font-weight: 700; font-size: 10.2pt; }
+    .item-title .at { font-weight: 500; color: var(--muted); }
+    .item-meta { font-size: 8.6pt; color: var(--soft); white-space: nowrap; }
+    .item-sub { font-size: 8.6pt; color: var(--soft); margin-top: 0.3mm; }
+    ul.points { margin-top: 1.3mm; padding-left: 4mm; color: var(--ink); }
+    ul.points li { margin-bottom: 0.7mm; }
+    ul.points li::marker { color: var(--accent); }
+    .sub-project { font-weight: 600; }
+
+    .stack { display: flex; flex-wrap: wrap; gap: 1.2mm; margin-top: 1.6mm; }
+    .stack span { font-size: 7.8pt; font-weight: 500; color: #1e40af; background: var(--chip); padding: 0.5mm 2mm; border-radius: 1mm; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0 8mm; }
+
+    .skills { display: grid; grid-template-columns: 28mm 1fr; row-gap: 1mm; column-gap: 3mm; }
+    .skills dt { font-weight: 600; }
+    .skills dd { color: var(--muted); }
+
+    .link { color: var(--accent); font-weight: 500; font-size: 8.6pt; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div>
+        <h1>Omar Amine</h1>
+        <div class="role">Frontend Developer · React &amp; Next.js</div>
+      </div>
+      <ul class="contact">
+        <li>Casablanca, Morocco · Open to remote</li>
+        <li><a href="mailto:amineomar019@gmail.com">amineomar019@gmail.com</a></li>
+        <li><a href="https://omaramine.vercel.app/">Portfolio</a> · <a href="https://github.com/DoDaa3">GitHub</a> · <a href="https://www.linkedin.com/in/omar-amine-460807207/">LinkedIn</a></li>
+      </ul>
+    </header>
+
+    <p class="summary">
+      Frontend developer with 3+ years of experience building modern web applications with React, Next.js, TypeScript
+      and Tailwind CSS. I turn Figma designs into responsive, accessible, performant interfaces, and I'm comfortable
+      across the stack with Node.js, REST APIs and SQL/NoSQL databases.
+    </p>
+
+    <section>
+      <h2>Experience</h2>
+
+      <div class="item">
+        <div class="item-head">
+          <div class="item-title">Frontend Engineer <span class="at">· UMMATY (Freelance)</span></div>
+          <div class="item-meta">Dec 2025 – Present · Remote</div>
+        </div>
+        <ul class="points">
+          <li>Leading the frontend redevelopment of UMMATY's official charity website, rebuilding the UI with React and Tailwind CSS for a cleaner, modern design.</li>
+          <li>Improving layout structure, responsiveness and accessibility, and building reusable components for faster future updates.</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="item-head">
+          <div class="item-title">Frontend Developer &amp; UI/UX Designer <span class="at">· HeyTajine (Freelance)</span></div>
+          <div class="item-meta">Dec 2024 – Feb 2025 · Remote</div>
+        </div>
+        <ul class="points">
+          <li>Designed the landing page in Figma for HeyTajine, a Slack bot for team recognition, then built it end to end.</li>
+          <li>Developed a responsive landing page and an intuitive dashboard with HTML, Tailwind CSS and JavaScript, deployed on Vercel.</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="item-head">
+          <div class="item-title">Software Developer <span class="at">· Metaverse</span></div>
+          <div class="item-meta">Apr 2023 – Feb 2024 · Casablanca (Hybrid)</div>
+        </div>
+        <div class="item-head">
+          <div class="item-sub">Software Developer Intern → promoted to full-time</div>
+          <div class="item-meta">Dec 2022 – Apr 2023</div>
+        </div>
+        <ul class="points">
+          <li><span class="sub-project">FCN4U</span> — Built an interactive thumbnail creator with React, Next.js and Fabric.js that lets users customize featured images for their posts; used server-side rendering to improve load times and SEO.</li>
+          <li><span class="sub-project">BimoHealth</span> — Developed the frontend of an online mental health consultation platform: interactive assessments, doctor search, appointment booking and secure video/chat sessions.</li>
+          <li>Contributed to backend authentication and AWS S3 storage for secure image uploads.</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="item-head">
+          <div class="item-title">Full Stack Engineer <span class="at">· Student's Mind</span></div>
+          <div class="item-meta">Dec 2020 – Feb 2021 · Casablanca</div>
+        </div>
+        <ul class="points">
+          <li>Built a school management system for student registration, grade entry and staff attendance.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Projects</h2>
+      <div class="two-col">
+        <div class="item">
+          <div class="item-head">
+            <div class="item-title">AI Content Studio</div>
+            <a class="link" href="https://ai-content-studio-zeta-gules.vercel.app/">Live ↗</a>
+          </div>
+          <p>AI writing platform powered by Google Gemini, with Supabase auth, React Query and live markdown rendering.</p>
+          <div class="stack"><span>Next.js</span><span>TypeScript</span><span>Supabase</span><span>Gemini AI</span></div>
+        </div>
+        <div class="item">
+          <div class="item-head">
+            <div class="item-title">FlowBoard</div>
+            <a class="link" href="https://kanban-client-amber.vercel.app">Live ↗</a>
+          </div>
+          <p>Real-time collaborative kanban with drag-and-drop, priorities, due dates and board, list, calendar and timeline views.</p>
+          <div class="stack"><span>React</span><span>Socket.io</span><span>Express</span><span>PostgreSQL</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Skills</h2>
+      <dl class="skills">
+        <dt>Frontend</dt><dd>React, Next.js, TypeScript, JavaScript (ES6+), HTML5, CSS3, Tailwind CSS, React Query, Fabric.js</dd>
+        <dt>Backend</dt><dd>Node.js, Express, Socket.io, REST APIs, Supabase, AWS S3</dd>
+        <dt>Databases</dt><dd>PostgreSQL, MongoDB, MySQL, SQL Server</dd>
+        <dt>Design</dt><dd>Figma, responsive design, UI/UX, accessibility</dd>
+        <dt>Tools &amp; other</dt><dd>Git, GitHub, Vercel, SSR / SEO · Python, C#, ASP.NET</dd>
+      </dl>
+    </section>
+
+    <div class="two-col">
+      <section>
+        <h2>Education</h2>
+        <div class="item">
+          <div class="item-head">
+            <div class="item-title">IT Development</div>
+            <div class="item-meta">2018 – 2020</div>
+          </div>
+          <div class="item-sub">Specialized Institute of Technology, Casablanca</div>
+        </div>
+        <div class="item">
+          <div class="item-head">
+            <div class="item-title">Baccalaureate, Physics &amp; Chemistry</div>
+            <div class="item-meta">2018</div>
+          </div>
+          <div class="item-sub">Moulay Driss 1st High School, Casablanca</div>
+        </div>
+      </section>
+      <section>
+        <h2>Languages</h2>
+        <p>Arabic · Amazigh · French · English</p>
+      </section>
+    </div>
+  </div>
+</body>
+</html>

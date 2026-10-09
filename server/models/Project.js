@@ -15,6 +15,10 @@ const projectSchema = new mongoose.Schema({
     type: String,
     default: '',
   },
+  imagePosition: {
+    type: String,
+    default: 'top',
+  },
   techStack: {
     type: [String],
     default: [],

@@ -6,10 +6,10 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation';
 const fallbackProjects = [
   {
     _id: '1',
-    title: 'Task Management App',
+    title: 'FlowBoard',
     description:
-      'A collaborative task management tool with real-time updates, drag-and-drop kanban boards, and team workspace features.',
-    image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop',
+      'A collaborative kanban task manager with real-time updates, drag-and-drop boards, priorities, due dates, and multiple views (board, list, calendar, timeline).',
+    image: '/images/projects/task-management.webp',
     techStack: ['React', 'Socket.io', 'Express', 'PostgreSQL'],
     liveUrl: 'https://kanban-client-amber.vercel.app',
     githubUrl: 'https://github.com/DoDaa3/todo-app',
@@ -19,7 +19,8 @@ const fallbackProjects = [
     title: 'Hey Tajine',
     description:
       'A Slack bot with a dedicated landing page, designed to enhance team communication and workflow automation within Slack workspaces.',
-    image: 'https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=600&h=400&fit=crop',
+    image: '/images/projects/hey-tajine.webp',
+    imagePosition: '50% 40%',
     techStack: ['HTML', 'Tailwind CSS', 'JavaScript'],
     liveUrl: 'https://hey-tajine-frontend.vercel.app/',
   },
@@ -28,7 +29,7 @@ const fallbackProjects = [
     title: 'Ummaty',
     description:
       'A charity website landing page built to connect people with charitable causes and make giving back to the community more accessible.',
-    image: 'https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=600&h=400&fit=crop',
+    image: '/images/projects/ummaty.webp',
     techStack: ['HTML', 'Tailwind CSS', 'React'],
     liveUrl: 'https://image-grid-ten.vercel.app/',
   },
@@ -37,10 +38,19 @@ const fallbackProjects = [
     title: 'AI Content Studio',
     description:
       'An AI-powered content generation platform built with Next.js and Google Gemini, featuring authentication via Supabase, real-time markdown rendering, and a polished animated UI.',
-    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop',
+    image: '/images/projects/ai-content-studio.webp',
     techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Supabase', 'Gemini AI', 'React Query'],
     liveUrl: 'https://ai-content-studio-zeta-gules.vercel.app/',
     githubUrl: 'https://github.com/DoDaa3/ai-content-studio',
+  },
+  {
+    _id: '5',
+    title: 'BimoHealth',
+    description:
+      'An online mental health consultation platform with interactive mental health assessments, responsive UI components, secure authentication, and S3-backed image uploads.',
+    image: '/images/projects/bimo-health.webp',
+    imagePosition: 'bottom',
+    techStack: ['React', 'Tailwind CSS', 'AWS S3'],
   },
 ];
 
@@ -107,7 +117,17 @@ function Projects() {
         ) : (
           <div className="grid sm:grid-cols-2 gap-6">
             {projects.map((project, i) => (
-              <ProjectCard key={project._id} project={project} index={i} />
+              <ProjectCard
+                key={project._id}
+                project={project}
+                index={i}
+                // Center a lone last card instead of leaving it stuck on the left
+                className={
+                  projects.length % 2 === 1 && i === projects.length - 1
+                    ? 'sm:col-span-2 sm:w-[calc(50%-0.75rem)] sm:mx-auto'
+                    : ''
+                }
+              />
             ))}
           </div>
         )}

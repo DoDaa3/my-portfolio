@@ -28,10 +28,11 @@ const experiences = [
     company: 'Metaverse',
     period: 'Dec 2022 — Feb 2024',
     location: 'Casablanca, Morocco · Hybrid',
+    promotedFrom: { role: 'Software Developer Intern', period: 'Dec 2022 — Apr 2023' },
     description: null,
     projects: [
       {
-        name: 'FCN4U.com',
+        name: 'FCN4U',
         description:
           'Built an interactive thumbnail creator using React.js, Next.js, Tailwind CSS, and Fabric.js, enabling users to customize featured images. Developed multiple UI components, implemented dynamic customization options, and optimized performance with server-side rendering for faster load times and improved SEO.',
       },
@@ -112,6 +113,11 @@ function ExperienceCard({ experience, index, isLast }) {
             <p className="text-primary-600 dark:text-primary-400 font-semibold">
               {experience.company}
             </p>
+            {experience.promotedFrom && (
+              <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                Promoted from {experience.promotedFrom.role} ({experience.promotedFrom.period})
+              </p>
+            )}
           </div>
           <div className="text-sm text-gray-500 dark:text-gray-400 sm:text-right shrink-0">
             <p className="font-medium">{experience.period}</p>

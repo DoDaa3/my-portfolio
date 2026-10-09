@@ -1,12 +1,12 @@
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
-function ProjectCard({ project, index = 0 }) {
+function ProjectCard({ project, index = 0, className = '' }) {
   const [ref, isVisible] = useScrollAnimation(0.1);
 
   return (
     <div
       ref={ref}
-      className={`scroll-hidden ${isVisible ? 'scroll-visible' : ''}`}
+      className={`scroll-hidden ${isVisible ? 'scroll-visible' : ''} ${className}`}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
       <div className="group bg-white dark:bg-gray-800/50 rounded-xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 h-full flex flex-col">
@@ -17,6 +17,7 @@ function ProjectCard({ project, index = 0 }) {
               src={project.image}
               alt={project.title}
               loading="lazy"
+              style={{ objectPosition: project.imagePosition || 'top' }}
               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
             />
           ) : (
@@ -48,6 +49,11 @@ function ProjectCard({ project, index = 0 }) {
                 >
                   GitHub
                 </a>
+              )}
+              {!project.liveUrl && !project.githubUrl && (
+                <span className="px-4 py-2 bg-white/90 text-gray-900 rounded-lg text-sm font-medium shadow-lg">
+                  Private client project
+                </span>
               )}
             </div>
           </div>
