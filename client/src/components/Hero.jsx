@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 
-const roles = ['Frontend Developer', 'React Specialist', 'UI/UX Enthusiast', 'Freelancer'];
+const roles = ['Frontend Engineer', 'React Specialist', 'UI/UX Enthusiast', 'Freelancer'];
 
 function Hero() {
   const [text, setText] = useState('');

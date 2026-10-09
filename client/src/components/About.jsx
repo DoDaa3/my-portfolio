@@ -57,10 +57,10 @@ function About() {
             className={`scroll-hidden-right ${bioVisible ? 'scroll-visible-x' : ''}`}
           >
             <h3 className="text-2xl font-semibold mb-4">
-              A frontend developer based in Casablanca, Morocco
+              A frontend engineer based in Casablanca, Morocco
             </h3>
             <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-              I'm a frontend developer with 3+ years of experience building
+              I'm a frontend engineer with 3+ years of experience building
               modern web applications. I specialize in React.js, Next.js, and
               Tailwind CSS — turning Figma designs into responsive, accessible,
               and performant interfaces.
