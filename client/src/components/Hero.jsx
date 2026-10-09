@@ -1,65 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
-
-const roles = ['Frontend Engineer', 'React Specialist', 'UI/UX Enthusiast', 'Freelancer'];
-
 function Hero() {
-  const [text, setText] = useState('');
-  const [cursorVisible, setCursorVisible] = useState(true);
-  const phase = useRef('typing'); // typing | pausing | deleting | waiting
-  const roleIdx = useRef(0);
-  const charIdx = useRef(0);
-  const timer = useRef(null);
-
-  const tick = useCallback(() => {
-    const current = roles[roleIdx.current];
-
-    switch (phase.current) {
-      case 'typing':
-        charIdx.current++;
-        setText(current.slice(0, charIdx.current));
-        if (charIdx.current >= current.length) {
-          phase.current = 'pausing';
-          timer.current = setTimeout(tick, 2000);
-        } else {
-          timer.current = setTimeout(tick, 90 + Math.random() * 40);
-        }
-        break;
-
-      case 'pausing':
-        phase.current = 'deleting';
-        timer.current = setTimeout(tick, 30);
-        break;
-
-      case 'deleting':
-        charIdx.current--;
-        setText(current.slice(0, charIdx.current));
-        if (charIdx.current <= 0) {
-          phase.current = 'waiting';
-          timer.current = setTimeout(tick, 400);
-        } else {
-          timer.current = setTimeout(tick, 35);
-        }
-        break;
-
-      case 'waiting':
-        roleIdx.current = (roleIdx.current + 1) % roles.length;
-        phase.current = 'typing';
-        timer.current = setTimeout(tick, 100);
-        break;
-    }
-  }, []);
-
-  useEffect(() => {
-    timer.current = setTimeout(tick, 500);
-    return () => clearTimeout(timer.current);
-  }, [tick]);
-
-  // Separate cursor blink so it doesn't interfere with typing
-  useEffect(() => {
-    const blink = setInterval(() => setCursorVisible((v) => !v), 530);
-    return () => clearInterval(blink);
-  }, []);
-
   return (
     <section
       id="hero"
@@ -89,19 +28,18 @@ function Hero() {
           </span>
         </h1>
         <h2
-          className="text-xl sm:text-2xl md:text-3xl text-gray-600 dark:text-gray-400 mb-8 animate-slide-up h-9 sm:h-10 md:h-12"
+          className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-200 mb-6 animate-slide-up"
           style={{ animationDelay: '0.2s' }}
         >
-          <span>{text}</span>
-          <span className={`inline-block w-0.5 h-6 sm:h-7 md:h-8 bg-primary-500 ml-1 align-middle transition-opacity duration-100 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`} />
+          Frontend Engineer building fast, accessible web apps
         </h2>
         <p
           className="max-w-2xl mx-auto text-gray-600 dark:text-gray-400 text-lg mb-10 animate-slide-up leading-relaxed"
-          style={{ animationDelay: '0.4s' }}
+          style={{ animationDelay: '0.4s', textWrap: 'balance' }}
         >
-          I build modern, responsive web applications with React.js, Next.js, and
-          Tailwind CSS. From healthcare platforms to content creation tools,
-          I turn designs into polished, performant user experiences.
+          3+ years shipping React and Next.js products, from healthcare
+          platforms and AI tools to nonprofit websites. I turn Figma designs
+          into polished, performant interfaces.
         </p>
         <div
           className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up"
@@ -111,7 +49,7 @@ function Hero() {
             href="#projects"
             onClick={(e) => {
               e.preventDefault();
-              document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' });
+              document.querySelector('#projects')?.scrollIntoView();
             }}
             className="group px-8 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-medium transition-all duration-300 hover:shadow-lg hover:shadow-primary-600/25 hover:-translate-y-0.5"
           >
@@ -124,7 +62,7 @@ function Hero() {
             href="#contact"
             onClick={(e) => {
               e.preventDefault();
-              document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+              document.querySelector('#contact')?.scrollIntoView();
             }}
             className="px-8 py-3 border-2 border-primary-600 dark:border-primary-400 text-primary-600 dark:text-primary-400 hover:bg-primary-600 hover:text-white dark:hover:bg-primary-400 dark:hover:text-gray-900 rounded-lg font-medium transition-all duration-300 hover:-translate-y-0.5"
           >

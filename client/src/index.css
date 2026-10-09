@@ -82,3 +82,28 @@
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-gray-400 dark:bg-gray-600;
 }
+
+/* Respect the OS "reduce motion" setting: show everything immediately, no movement */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+    scroll-behavior: auto !important;
+  }
+
+  .scroll-hidden,
+  .scroll-hidden-left,
+  .scroll-hidden-right,
+  .scroll-hidden-scale {
+    opacity: 1;
+    transform: none;
+  }
+}
