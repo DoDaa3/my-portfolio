@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import type { Project } from '@/lib/projects';
 
@@ -88,6 +89,15 @@ function ProjectCard({ project, index = 0, className = '' }: ProjectCardProps) {
               </span>
             ))}
           </div>
+          {project.caseStudySlug && (
+            <Link
+              href={`/projects/${project.caseStudySlug}`}
+              className="inline-flex items-center gap-1.5 mt-4 text-sm font-semibold text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors group/link"
+            >
+              Read case study
+              <span className="transition-transform group-hover/link:translate-x-1" aria-hidden>&rarr;</span>
+            </Link>
+          )}
         </div>
       </div>
     </div>

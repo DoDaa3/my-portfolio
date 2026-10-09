@@ -2,6 +2,7 @@
 
 import { useState, useEffect, type MouseEvent } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import DarkModeToggle from './DarkModeToggle';
 
 const navLinks = [
@@ -15,6 +16,7 @@ const navLinks = [
 ];
 
 function Navbar() {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -38,6 +40,9 @@ function Navbar() {
     const el = document.querySelector(href);
     if (el) {
       el.scrollIntoView();
+    } else {
+      // On other pages (e.g. a case study), go back to that section on the home page
+      router.push(`/${href}`);
     }
   };
 

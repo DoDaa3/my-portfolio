@@ -5,14 +5,12 @@ import { ThemeProvider } from '@/components/ThemeProvider';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { themeInitScript } from '@/lib/theme';
+import { OG_IMAGE, SITE_NAME, SITE_URL } from '@/lib/site';
 import './globals.css';
 
-const SITE_URL = 'https://omaramine.vercel.app';
 const TITLE = 'Omar Amine | Frontend Engineer';
 const DESCRIPTION =
   'Frontend engineer in Casablanca building fast, responsive web apps with React, Next.js, TypeScript and Tailwind CSS.';
-// Bump ?v= whenever og-image.jpg changes so LinkedIn and others refetch it
-const OG_IMAGE = '/og-image.jpg?v=2';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -24,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: '/',
-    siteName: 'Omar Amine',
+    siteName: SITE_NAME,
     title: TITLE,
     description: DESCRIPTION,
     images: [

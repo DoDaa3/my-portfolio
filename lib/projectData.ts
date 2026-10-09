@@ -10,6 +10,8 @@ export interface Project {
   techStack: string[];
   liveUrl?: string;
   githubUrl?: string;
+  /** Set on the server when a case study exists (see lib/caseStudies.ts) */
+  caseStudySlug?: string;
 }
 
 export const fallbackProjects: Project[] = [
@@ -17,9 +19,9 @@ export const fallbackProjects: Project[] = [
     _id: '1',
     title: 'FlowBoard',
     description:
-      'A collaborative kanban task manager with real-time updates, drag-and-drop boards, priorities, due dates, and multiple views (board, list, calendar, timeline).',
+      'A real-time collaborative Kanban board with drag-and-drop, role-based board sharing, sprints, and board, list, calendar and timeline views.',
     image: '/images/projects/task-management.webp',
-    techStack: ['React', 'Socket.io', 'Express', 'PostgreSQL'],
+    techStack: ['React', 'TypeScript', 'Socket.io', 'Express', 'PostgreSQL', 'Prisma'],
     liveUrl: 'https://kanban-client-amber.vercel.app',
     githubUrl: 'https://github.com/DoDaa3/todo-app',
   },
