@@ -2,42 +2,7 @@
 
 import Image from 'next/image';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-
-interface Testimonial {
-  name: string;
-  role: string;
-  company: string;
-  relationship: string;
-  quote: string;
-  linkedIn: string;
-  avatar?: string;
-  date?: string;
-}
-
-const testimonials: Testimonial[] = [
-  {
-    name: 'El Mehdi Karami',
-    role: 'Lead Software Engineer',
-    company: 'Freelance Client — Hey Tajine',
-    relationship: 'Omar built Hey Tajine for El Mehdi',
-    quote:
-      'Omar is a talented frontend engineer with a keen eye for design and a proactive mindset. He not only builds clean, well-crafted interfaces but also suggests valuable improvements that enhance user experience. A great collaborator and problem solver—highly recommended!',
-    linkedIn: 'https://www.linkedin.com/in/omar-amine-460807207/',
-    avatar: '/images/el-mehdi-karami.jpeg',
-    date: 'March 2025',
-  },
-  {
-    name: 'Meryem Benmezouara',
-    role: 'Software Engineer',
-    company: 'Metaverse',
-    relationship: 'Worked with Omar at Metaverse',
-    quote:
-      'I had the opportunity to collaborate with Omar Amine on a project as a Frontend Developer. He is technically strong, detail-oriented, and highly collaborative. Omar delivers clean, efficient code and consistently contributes to creating engaging digital experiences. A great team player and a valuable asset to any tech team.',
-    linkedIn: 'https://www.linkedin.com/in/omar-amine-460807207/',
-    avatar: '/images/meryem-benmezouara.jpeg',
-    date: 'February 2026',
-  },
-];
+import { testimonials, type Testimonial } from '@/lib/profile';
 
 function StarRating() {
   return (

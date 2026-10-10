@@ -1,74 +1,7 @@
 'use client';
 
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-
-interface ExperienceItem {
-  role: string;
-  type: 'Freelance' | 'Full-time';
-  company: string;
-  period: string;
-  location?: string;
-  current?: boolean;
-  promotedFrom?: { role: string; period: string };
-  description: string | null;
-  projects?: { name: string; description: string }[];
-  skills: string[];
-}
-
-const experiences: ExperienceItem[] = [
-  {
-    role: 'Frontend Engineer',
-    type: 'Freelance',
-    company: 'UMMATY',
-    period: 'Dec 2025 — Present',
-    location: 'Casablanca, Morocco · Remote',
-    current: true,
-    description:
-      'Leading the frontend redevelopment of UMMATY\'s official website. Rebuilding the UI with ReactJS and Tailwind CSS for a cleaner, modern design. Improving layout structure, responsiveness, and accessibility while implementing reusable components for easier future updates.',
-    skills: ['React.js', 'Tailwind CSS', 'JavaScript', 'Figma', 'Vercel', 'Git'],
-  },
-  {
-    role: 'Frontend Developer',
-    type: 'Freelance',
-    company: 'HeyTajine',
-    period: 'Dec 2024 — Feb 2025',
-    location: 'Casablanca, Morocco · Remote',
-    description:
-      'Built the frontend for HeyTajine, a Slack bot project. Designed the landing page in Figma, then developed a responsive landing page and intuitive dashboard using HTML, Tailwind CSS, and JavaScript.',
-    skills: ['HTML5', 'Tailwind CSS', 'JavaScript', 'Figma', 'Git'],
-  },
-  {
-    role: 'Software Developer',
-    type: 'Full-time',
-    company: 'Metaverse',
-    period: 'Dec 2022 — Feb 2024',
-    location: 'Casablanca, Morocco · Hybrid',
-    promotedFrom: { role: 'Software Developer Intern', period: 'Dec 2022 — Apr 2023' },
-    description: null,
-    projects: [
-      {
-        name: 'FCN4U',
-        description:
-          'Built an interactive thumbnail creator using React.js, Next.js, Tailwind CSS, and Fabric.js, enabling users to customize featured images. Developed multiple UI components, implemented dynamic customization options, and optimized performance with server-side rendering for faster load times and improved SEO.',
-      },
-      {
-        name: 'BimoHealth',
-        description:
-          'Developed the frontend for an online mental health consultation platform using React.js and Tailwind CSS. Built interactive mental health assessments, responsive UI components, and contributed to backend authentication and S3 bucket storage for secure image uploads.',
-      },
-    ],
-    skills: ['React.js', 'Next.js', 'Tailwind CSS', 'Fabric.js', 'Git', 'AWS S3'],
-  },
-  {
-    role: 'Full Stack Engineer',
-    type: 'Full-time',
-    company: "Student's Mind",
-    period: 'Dec 2020 — Feb 2021',
-    description:
-      'Developed a comprehensive school management system using Python, Qt Designer, and MySQL. Built features for student registration, grade entry, and employee attendance tracking, ensuring seamless record management and efficient educational processes.',
-    skills: ['Python', 'Qt Designer', 'MySQL'],
-  },
-];
+import { experiences, type ExperienceItem } from '@/lib/profile';
 
 function ExperienceCard({ experience, index, isLast }: { experience: ExperienceItem; index: number; isLast: boolean }) {
   const [ref, isVisible] = useScrollAnimation(0.1);
