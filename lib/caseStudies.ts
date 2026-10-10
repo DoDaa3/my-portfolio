@@ -9,6 +9,8 @@ export interface CaseStudyImage {
   caption?: string;
   /** Tall screenshots (e.g. mobile) are shown narrower */
   portrait?: boolean;
+  /** Medium width, for dialogs and dense screens that look oversized full-width */
+  narrow?: boolean;
 }
 
 export interface CaseStudy {
@@ -317,7 +319,45 @@ export const caseStudies: CaseStudy[] = [
         'Some weeks we got blocked by new challenges, but we kept the client in the loop, and they were happy with both the result and the progress along the way.',
       ],
     },
-    gallery: [],
+    gallery: [
+      {
+        src: '/images/projects/bimohealth-videocall.webp',
+        alt: 'BimoHealth video consultation screen with participants, group chat and call controls',
+        width: 1800,
+        height: 1220,
+        caption: 'The video consultation screen (Figma design), which I implemented with the Amazon Chime SDK.',
+      },
+      {
+        src: '/images/projects/bimohealth-appointments.webp',
+        alt: 'Patient appointments calendar with booked sessions and a Book an Appointment button',
+        width: 1800,
+        height: 1563,
+        caption: 'The patient’s appointments calendar, part of the booking feature I built (Figma design).',
+      },
+      {
+        src: '/images/projects/bimohealth-calendar.webp',
+        alt: 'Booking form with title, description, type, date, time and doctor fields',
+        width: 1800,
+        height: 1508,
+        caption: 'Booking an appointment: pick the type, time and doctor (Figma design).',
+        narrow: true,
+      },
+      {
+        src: '/images/projects/bimohealth-doctors.webp',
+        alt: 'Doctor search page with a search bar, doctor cards and pagination',
+        width: 1800,
+        height: 1982,
+        caption: 'Doctor search (Figma design).',
+        narrow: true,
+      },
+      {
+        src: '/images/projects/bimohealth-dashboard.webp',
+        alt: 'Admin dashboard with patient stats, growth charts and a patient table',
+        width: 1800,
+        height: 1200,
+        caption: 'The admin dashboard (Figma design).',
+      },
+    ],
     nextHeading: 'Outcome',
     next: [
       'BimoHealth launched, and the client was happy with the project.',
