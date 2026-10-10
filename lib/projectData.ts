@@ -67,7 +67,8 @@ export const fallbackProjects: Project[] = [
     _id: '6',
     title: 'FCN4U',
     description:
-      'A Photoshop-style thumbnail editor built into a content platform: text, images, shapes, arrows, shadows and layers.',
+      'A community content platform. I helped design and build the whole site, and built its Photoshop-style thumbnail editor on my own.',
+    image: '/images/projects/fcn4u-desktop.webp',
     techStack: ['React', 'Next.js', 'Tailwind CSS', 'Fabric.js'],
   },
 ];

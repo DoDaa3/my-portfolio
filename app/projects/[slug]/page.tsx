@@ -39,14 +39,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 function Figure({ image, priority = false }: { image: CaseStudyImage; priority?: boolean }) {
   return (
-    <figure>
+    <figure className={image.portrait ? 'max-w-sm mx-auto' : undefined}>
       <div className="overflow-hidden rounded-xl border border-gray-200 dark:border-gray-800 shadow-lg">
         <Image
           src={image.src}
           alt={image.alt}
           width={image.width}
           height={image.height}
-          sizes="(min-width: 1024px) 896px, 100vw"
+          sizes={image.portrait ? '384px' : '(min-width: 1024px) 896px, 100vw'}
           priority={priority}
           className="w-full h-auto"
         />

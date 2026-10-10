@@ -7,6 +7,8 @@ export interface CaseStudyImage {
   width: number;
   height: number;
   caption?: string;
+  /** Tall screenshots (e.g. mobile) are shown narrower */
+  portrait?: boolean;
 }
 
 export interface CaseStudy {
@@ -201,7 +203,7 @@ export const caseStudies: CaseStudy[] = [
     slug: 'fcn4u',
     projectTitle: 'FCN4U',
     title: 'FCN4U',
-    tagline: 'A Photoshop-style editor in the browser that lets creators design a YouTube-like thumbnail for every post.',
+    tagline: 'A community content platform where every post’s thumbnail is designed in a built-in, Photoshop-style editor, which I built.',
     meta: {
       role: 'UI designer & frontend developer',
       timeline: 'At Metaverse, 2022 – 2024',
@@ -209,9 +211,16 @@ export const caseStudies: CaseStudy[] = [
       team: '2 designers, 5–6 frontend devs, 1 backend dev',
     },
     stack: ['React', 'Next.js', 'Tailwind CSS', 'Fabric.js', 'Figma'],
+    cover: {
+      src: '/images/projects/fcn4u-desktop.webp',
+      alt: 'FCN4U home feed with category filters and a grid of posts',
+      width: 1600,
+      height: 771,
+      caption: 'Every thumbnail in this feed was designed by creators with the editor I built. (Usernames blurred for privacy.)',
+    },
     overview: [
-      'FCN4U is a content platform where every post needs a strong featured image. Instead of sending creators to an external design tool, we built one right into the product.',
-      'I worked on both sides of it: as one of the two designers I helped shape the interface in Figma, and as one of the frontend developers I built the thumbnail editor itself.',
+      'FCN4U (Free Community Network) is a content platform where creators share videos and posts across categories. Every post needs a strong featured image, so instead of sending creators to an external design tool, the platform has one built in.',
+      'I worked on the whole website: as one of the two designers I helped shape the interface in Figma, and as one of the frontend developers I turned those designs into the product. The thumbnail editor was my task alone. It was the most challenging thing I built there, and the one I learned the most from.',
     ],
     features: [
       'Add and edit text with fonts, colors and styling',
@@ -242,7 +251,16 @@ export const caseStudies: CaseStudy[] = [
         'Building most of it myself meant designing how every element is created, selected, moved, styled and stacked, and making all of it feel as natural as a desktop design app.',
       ],
     },
-    gallery: [],
+    gallery: [
+      {
+        src: '/images/projects/fcn4u-mobile.webp',
+        alt: 'FCN4U mobile feed showing a post card with its custom thumbnail',
+        width: 854,
+        height: 1222,
+        caption: 'The responsive mobile feed.',
+        portrait: true,
+      },
+    ],
     nextHeading: 'Outcome',
     next: [
       'FCN4U launched while the team kept shipping new features on top of it.',
