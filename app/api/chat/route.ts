@@ -76,7 +76,14 @@ export async function POST(request: Request) {
           role: m.role === 'assistant' ? 'model' : 'user',
           parts: [{ text: m.content }],
         })),
-        generationConfig: { temperature: 0.3, maxOutputTokens: 600 },
+        generationConfig: {
+          temperature: 0.3,
+          maxOutputTokens: 1024,
+          // 2.5 models "think" by default, and thinking tokens count against
+          // maxOutputTokens, which can leave nothing for the reply. Short,
+          // grounded Q&A doesn't need it.
+          thinkingConfig: { thinkingBudget: 0 },
+        },
       }),
     }
   );
@@ -93,6 +100,8 @@ export async function POST(request: Request) {
   const decoder = new TextDecoder();
   const encoder = new TextEncoder();
   let buffer = '';
+  let sentText = false;
+  let finishReason: string | undefined;
 
   const stream = upstream.body.pipeThrough(
     new TransformStream<Uint8Array, Uint8Array>({
@@ -105,14 +114,22 @@ export async function POST(request: Request) {
             if (!line.startsWith('data:')) continue;
             try {
               const data = JSON.parse(line.slice(5));
-              const parts: { text?: string }[] = data?.candidates?.[0]?.content?.parts ?? [];
+              const candidate = data?.candidates?.[0];
+              finishReason = candidate?.finishReason ?? finishReason;
+              const parts: { text?: string }[] = candidate?.content?.parts ?? [];
               const text = parts.map((p) => p.text ?? '').join('');
-              if (text) controller.enqueue(encoder.encode(text));
+              if (text) {
+                sentText = true;
+                controller.enqueue(encoder.encode(text));
+              }
             } catch {
               // Ignore keep-alives and partial lines
             }
           }
         }
+      },
+      flush() {
+        if (!sentText) console.error('Gemini returned no text. finishReason:', finishReason);
       },
     })
   );
