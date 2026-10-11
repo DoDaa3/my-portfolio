@@ -64,9 +64,9 @@ function TestimonialCard({ testimonial, index }: { testimonial: Testimonial; ind
                 )}
               </div>
               <div className="text-left sm:text-center">
-                <h4 className="font-bold text-gray-900 dark:text-white text-lg">
+                <h3 className="font-bold text-gray-900 dark:text-white text-lg">
                   {testimonial.name}
-                </h4>
+                </h3>
                 <p className="text-sm text-primary-600 dark:text-primary-400 font-medium leading-snug">
                   {testimonial.role}
                 </p>
