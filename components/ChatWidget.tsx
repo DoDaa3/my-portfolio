@@ -2,12 +2,20 @@
 
 import { useCallback, useEffect, useRef, useState, type FormEvent, type KeyboardEvent, type ReactNode } from 'react';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 interface Message {
   role: 'user' | 'assistant';
   content: string;
   error?: boolean;
 }
+
+const PROJECT_SUGGESTIONS = [
+  'What was the hardest part of this project?',
+  'What was Omar’s role here?',
+  'Which technologies did he use?',
+  'What would he improve next?',
+];
 
 const SUGGESTIONS = [
   'What’s Omar’s experience with React?',
@@ -123,6 +131,8 @@ function SparkleIcon({ className }: { className?: string }) {
 }
 
 export default function ChatWidget() {
+  const pathname = usePathname();
+  const suggestions = pathname.startsWith('/projects/') ? PROJECT_SUGGESTIONS : SUGGESTIONS;
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
@@ -184,7 +194,7 @@ export default function ChatWidget() {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: history.map(({ role, content }) => ({ role, content })) }),
+        body: JSON.stringify({ messages: history.map(({ role, content }) => ({ role, content })), page: pathname }),
         signal: controller.signal,
       });
 
@@ -316,7 +326,7 @@ export default function ChatWidget() {
 
           {messages.length === 0 && (
             <div className="pl-[38px] flex flex-wrap gap-2">
-              {SUGGESTIONS.map((s) => (
+              {suggestions.map((s) => (
                 <button
                   key={s}
                   type="button"

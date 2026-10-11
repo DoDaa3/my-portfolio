@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { chatSystemPrompt } from '@/lib/chatContext';
+import { getCaseStudy } from '@/lib/caseStudies';
 
 export const maxDuration = 30;
 
@@ -24,6 +25,16 @@ function isRateLimited(ip: string) {
 interface ChatMessage {
   role: 'user' | 'assistant';
   content: string;
+}
+
+// Tell the assistant where the visitor is, so "this project" or "this page" make sense.
+// Only known routes are described; anything else is ignored.
+function describePage(page: unknown) {
+  if (typeof page !== 'string') return null;
+  if (page === '/') return 'the home page (overview of Omar, his experience, skills, projects and contact form)';
+  const slug = page.match(/^\/projects\/([a-z0-9-]+)\/?$/)?.[1];
+  const study = slug ? getCaseStudy(slug) : undefined;
+  return study ? `the ${study.title} case study page (${page})` : null;
 }
 
 function parseMessages(body: unknown): ChatMessage[] | null {
@@ -56,8 +67,11 @@ export async function POST(request: Request) {
   }
 
   let messages: ChatMessage[] | null = null;
+  let page: string | null = null;
   try {
-    messages = parseMessages(await request.json());
+    const body = await request.json();
+    messages = parseMessages(body);
+    page = describePage(body?.page);
   } catch {
     // fall through to the 400 below
   }
@@ -71,7 +85,15 @@ export async function POST(request: Request) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
       body: JSON.stringify({
-        systemInstruction: { parts: [{ text: chatSystemPrompt }] },
+        systemInstruction: {
+          parts: [
+            {
+              text: page
+                ? `${chatSystemPrompt}\n\nThe visitor is currently viewing ${page}. If they say "this project", "this page" or "here", they mean that.`
+                : chatSystemPrompt,
+            },
+          ],
+        },
         contents: messages.map((m) => ({
           role: m.role === 'assistant' ? 'model' : 'user',
           parts: [{ text: m.content }],
