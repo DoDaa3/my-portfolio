@@ -111,32 +111,37 @@ export async function POST(request: Request) {
   let sentText = false;
   let finishReason: string | undefined;
 
+  // Handle one SSE event: pull out the text parts and forward them
+  const handleEvent = (event: string, controller: TransformStreamDefaultController<Uint8Array>) => {
+    for (const line of event.split('\n')) {
+      if (!line.startsWith('data:')) continue;
+      try {
+        const data = JSON.parse(line.slice(5));
+        const candidate = data?.candidates?.[0];
+        finishReason = candidate?.finishReason ?? finishReason;
+        const parts: { text?: string; thought?: boolean }[] = candidate?.content?.parts ?? [];
+        const text = parts.filter((p) => !p.thought).map((p) => p.text ?? '').join('');
+        if (text) {
+          sentText = true;
+          controller.enqueue(encoder.encode(text));
+        }
+      } catch {
+        // Ignore keep-alives and partial lines
+      }
+    }
+  };
+
   const stream = upstream.body.pipeThrough(
     new TransformStream<Uint8Array, Uint8Array>({
       transform(chunk, controller) {
-        buffer += decoder.decode(chunk, { stream: true });
+        // Google separates events with \r\n\r\n; normalize so splitting works either way
+        buffer = (buffer + decoder.decode(chunk, { stream: true })).replace(/\r\n/g, '\n');
         const events = buffer.split('\n\n');
         buffer = events.pop() ?? '';
-        for (const event of events) {
-          for (const line of event.split('\n')) {
-            if (!line.startsWith('data:')) continue;
-            try {
-              const data = JSON.parse(line.slice(5));
-              const candidate = data?.candidates?.[0];
-              finishReason = candidate?.finishReason ?? finishReason;
-              const parts: { text?: string }[] = candidate?.content?.parts ?? [];
-              const text = parts.map((p) => p.text ?? '').join('');
-              if (text) {
-                sentText = true;
-                controller.enqueue(encoder.encode(text));
-              }
-            } catch {
-              // Ignore keep-alives and partial lines
-            }
-          }
-        }
+        for (const event of events) handleEvent(event, controller);
       },
-      flush() {
+      flush(controller) {
+        if (buffer.trim()) handleEvent(buffer, controller);
         if (!sentText) console.error('Gemini returned no text. finishReason:', finishReason);
       },
     })
