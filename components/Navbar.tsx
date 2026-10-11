@@ -47,80 +47,83 @@ function Navbar() {
   };
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-white/90 dark:bg-gray-950/90 backdrop-blur-md shadow-md'
-          : 'bg-transparent'
-      }`}
-    >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link
-            href="/"
-            className="text-xl font-bold whitespace-nowrap text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors z-50"
-          >
-            &lt;Omar /&gt;
-          </Link>
+    <>
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? 'bg-white/90 dark:bg-gray-950/90 backdrop-blur-md shadow-md'
+            : 'bg-transparent'
+        }`}
+      >
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <Link
+              href="/"
+              className="text-xl font-bold whitespace-nowrap text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors z-50"
+            >
+              &lt;Omar /&gt;
+            </Link>
 
-          {/* Desktop nav */}
-          <div className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
+            {/* Desktop nav */}
+            <div className="hidden lg:flex items-center gap-8">
+              {navLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                >
+                  {link.label}
+                </a>
+              ))}
               <a
-                key={link.label}
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                href="/Omar-Amine-CV.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-1.5 text-sm font-medium rounded-lg border border-primary-600 dark:border-primary-400 text-primary-600 dark:text-primary-400 hover:bg-primary-600 hover:text-white dark:hover:bg-primary-400 dark:hover:text-gray-900 transition-colors"
               >
-                {link.label}
+                Resume
               </a>
-            ))}
-            <a
-              href="/Omar-Amine-CV.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-1.5 text-sm font-medium rounded-lg border border-primary-600 dark:border-primary-400 text-primary-600 dark:text-primary-400 hover:bg-primary-600 hover:text-white dark:hover:bg-primary-400 dark:hover:text-gray-900 transition-colors"
-            >
-              Resume
-            </a>
-            <DarkModeToggle />
-          </div>
+              <DarkModeToggle />
+            </div>
 
-          {/* Mobile menu button */}
-          <div className="lg:hidden flex items-center gap-3 z-50">
-            <DarkModeToggle />
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="relative w-10 h-10 flex items-center justify-center rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-              aria-label="Toggle menu"
-            >
-              {/* Animated hamburger lines */}
-              <div className="w-5 h-4 flex flex-col justify-between">
-                <span
-                  className={`block h-0.5 w-full bg-current rounded-full transition-all duration-300 origin-center ${
-                    isOpen ? 'translate-y-[7px] rotate-45' : ''
-                  }`}
-                />
-                <span
-                  className={`block h-0.5 w-full bg-current rounded-full transition-all duration-300 ${
-                    isOpen ? 'opacity-0 scale-x-0' : ''
-                  }`}
-                />
-                <span
-                  className={`block h-0.5 w-full bg-current rounded-full transition-all duration-300 origin-center ${
-                    isOpen ? '-translate-y-[7px] -rotate-45' : ''
-                  }`}
-                />
-              </div>
-            </button>
+            {/* Mobile menu button */}
+            <div className="lg:hidden flex items-center gap-3 z-50">
+              <DarkModeToggle />
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="relative w-10 h-10 flex items-center justify-center rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                aria-label="Toggle menu"
+              >
+                {/* Animated hamburger lines */}
+                <div className="w-5 h-4 flex flex-col justify-between">
+                  <span
+                    className={`block h-0.5 w-full bg-current rounded-full transition-all duration-300 origin-center ${
+                      isOpen ? 'translate-y-[7px] rotate-45' : ''
+                    }`}
+                  />
+                  <span
+                    className={`block h-0.5 w-full bg-current rounded-full transition-all duration-300 ${
+                      isOpen ? 'opacity-0 scale-x-0' : ''
+                    }`}
+                  />
+                  <span
+                    className={`block h-0.5 w-full bg-current rounded-full transition-all duration-300 origin-center ${
+                      isOpen ? '-translate-y-[7px] -rotate-45' : ''
+                    }`}
+                  />
+                </div>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      </nav>
 
-      {/* Mobile fullscreen overlay */}
+      {/* Mobile fullscreen overlay. Kept outside <nav>: the nav gets backdrop-blur when
+          scrolled, and a backdrop-filter traps fixed children inside the nav's box */}
       <div
-        className={`lg:hidden fixed inset-0 z-40 transition-all duration-400 ${
+        className={`lg:hidden fixed inset-0 z-[45] transition-all duration-400 ${
           isOpen
             ? 'opacity-100 pointer-events-auto'
             : 'opacity-0 pointer-events-none'
@@ -167,7 +170,7 @@ function Navbar() {
           </a>
         </div>
       </div>
-    </nav>
+    </>
   );
 }
 

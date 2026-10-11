@@ -259,7 +259,7 @@ export default function ChatWidget() {
         aria-label="Ask my AI about Omar"
         aria-expanded={open}
         aria-controls="ask-ai-panel"
-        className={`fixed z-[60] bottom-5 right-5 sm:bottom-6 sm:right-6 group flex items-center gap-2 h-14 pl-4 pr-5 rounded-full bg-gradient-to-r from-primary-600 to-primary-500 text-white font-semibold shadow-lg shadow-primary-600/30 hover:shadow-xl hover:shadow-primary-600/40 hover:-translate-y-0.5 transition-all duration-300 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-400/50 ${
+        className={`fixed z-40 bottom-5 right-5 sm:bottom-6 sm:right-6 group flex items-center gap-2 h-14 pl-4 pr-5 rounded-full bg-gradient-to-r from-primary-600 to-primary-500 text-white font-semibold shadow-lg shadow-primary-600/30 hover:shadow-xl hover:shadow-primary-600/40 hover:-translate-y-0.5 transition-all duration-300 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-400/50 ${
           open ? 'opacity-0 scale-90 pointer-events-none' : 'opacity-100 scale-100'
         }`}
       >
