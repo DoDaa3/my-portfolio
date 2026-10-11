@@ -89,10 +89,18 @@ export async function POST(request: Request) {
   );
 
   if (!upstream.ok || !upstream.body) {
-    console.error('Gemini error:', upstream.status, await upstream.text().catch(() => ''));
+    const details = await upstream.text().catch(() => '');
+    console.error('Gemini error:', upstream.status, details);
+    // Google's status code (e.g. RESOURCE_EXHAUSTED) is safe to expose and makes failures diagnosable
+    let code: string | undefined;
+    try {
+      code = JSON.parse(details)?.error?.status;
+    } catch {
+      // not JSON
+    }
     return NextResponse.json(
-      { error: 'The assistant is unavailable right now. Please try again later.' },
-      { status: 502 }
+      { error: 'The assistant is unavailable right now. Please try again later.', code: code ?? upstream.status },
+      { status: upstream.status === 429 ? 429 : 502 }
     );
   }
 
