@@ -4,7 +4,11 @@ import { getCaseStudy } from '@/lib/caseStudies';
 
 export const maxDuration = 30;
 
-const MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash-lite';
+// Tried in order; each model has its own quota, so falling back on a 429 stretches the free tier
+const MODELS = (process.env.GEMINI_MODELS || 'gemini-2.5-flash-lite,gemini-2.5-flash')
+  .split(',')
+  .map((m) => m.trim())
+  .filter(Boolean);
 const MAX_MESSAGES = 12;
 const MAX_MESSAGE_LENGTH = 1000;
 
@@ -81,28 +85,38 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Invalid request.' }, { status: 400 });
   }
 
-  const upstream = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:streamGenerateContent?alt=sse`,
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
-      body: JSON.stringify({
-        systemInstruction: { parts: [{ text: buildSystemPrompt(page) }] },
-        contents: messages.map((m) => ({
-          role: m.role === 'assistant' ? 'model' : 'user',
-          parts: [{ text: m.content }],
-        })),
-        generationConfig: {
-          temperature: 0.3,
-          maxOutputTokens: 1024,
-          // 2.5 models "think" by default, and thinking tokens count against
-          // maxOutputTokens, which can leave nothing for the reply. Short,
-          // grounded Q&A doesn't need it.
-          thinkingConfig: { thinkingBudget: 0 },
-        },
-      }),
-    }
-  );
+  const requestInit = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
+    body: JSON.stringify({
+      systemInstruction: { parts: [{ text: buildSystemPrompt(page) }] },
+      contents: messages.map((m) => ({
+        role: m.role === 'assistant' ? 'model' : 'user',
+        parts: [{ text: m.content }],
+      })),
+      generationConfig: {
+        temperature: 0.3,
+        maxOutputTokens: 1024,
+        // 2.5 models "think" by default, and thinking tokens count against
+        // maxOutputTokens, which can leave nothing for the reply. Short,
+        // grounded Q&A doesn't need it.
+        thinkingConfig: { thinkingBudget: 0 },
+      },
+    }),
+  };
+
+  let upstream: Response | null = null;
+  for (const model of MODELS) {
+    upstream = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/${model}:streamGenerateContent?alt=sse`,
+      requestInit
+    );
+    if (upstream.status !== 429) break;
+  }
+
+  if (!upstream) {
+    return NextResponse.json({ error: 'The assistant is not configured yet.' }, { status: 503 });
+  }
 
   if (!upstream.ok || !upstream.body) {
     const details = await upstream.text().catch(() => '');
@@ -114,10 +128,11 @@ export async function POST(request: Request) {
     } catch {
       // not JSON
     }
-    return NextResponse.json(
-      { error: 'The assistant is unavailable right now. Please try again later.', code: code ?? upstream.status },
-      { status: upstream.status === 429 ? 429 : 502 }
-    );
+    const error =
+      upstream.status === 429
+        ? 'I’ve answered a lot of questions today and reached my daily limit. Please try again tomorrow.'
+        : 'The assistant is unavailable right now. Please try again later.';
+    return NextResponse.json({ error, code: code ?? upstream.status }, { status: upstream.status === 429 ? 429 : 502 });
   }
 
   // Gemini streams Server-Sent Events; forward just the text so the client can render it as it arrives
