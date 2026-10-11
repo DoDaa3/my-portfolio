@@ -19,26 +19,44 @@ const SUGGESTIONS = [
 const CONTACT_EMAIL = 'amineomar019@gmail.com';
 const MAX_LENGTH = 1000;
 
-// Minimal formatting for assistant replies: paragraphs, "- " bullets, **bold** and links
+const SITE_ORIGIN = 'https://omaramine.vercel.app';
+
+function ChatLink({ href, children }: { href: string; children: ReactNode }) {
+  const url = href.replace(/[.,;:]$/, '');
+  // Links to this site stay in the tab (the chat stays open across pages)
+  const internal = url.startsWith(SITE_ORIGIN) || url.startsWith('/');
+  return (
+    <a
+      href={internal ? url.replace(SITE_ORIGIN, '') || '/' : url}
+      {...(internal ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
+      className="font-medium text-primary-600 dark:text-primary-400 underline underline-offset-2 break-words"
+    >
+      {children}
+    </a>
+  );
+}
+
+// Minimal formatting for assistant replies: **bold**, [markdown](links), bare URLs and emails
 function renderInline(text: string, keyPrefix: string): ReactNode[] {
-  const pattern = /(\*\*[^*]+\*\*|https?:\/\/[^\s)]+|[\w.+-]+@[\w-]+(?:\.[\w-]+)+)/g;
+  const pattern = /(\*\*[^*]+\*\*|\[[^\]]+\]\((?:https?:\/\/|\/)[^\s)]+\)|https?:\/\/[^\s)]+|[\w.+-]+@[\w-]+(?:\.[\w-]+)+)/g;
   return text.split(pattern).map((part, i) => {
     const key = `${keyPrefix}-${i}`;
     if (part.startsWith('**') && part.endsWith('**')) {
       return <strong key={key} className="font-semibold">{part.slice(2, -2)}</strong>;
     }
+    const md = part.match(/^\[([^\]]+)\]\(([^\s)]+)\)$/);
+    if (md) {
+      return <ChatLink key={key} href={md[2]}>{md[1]}</ChatLink>;
+    }
     if (/^https?:\/\//.test(part)) {
-      const url = part.replace(/[.,]$/, '');
-      const internal = url.startsWith('https://omaramine.vercel.app');
+      // Keep sentence punctuation outside the link
+      const trailing = part.match(/[.,;:]$/)?.[0] ?? '';
+      const url = trailing ? part.slice(0, -1) : part;
       return (
-        <a
-          key={key}
-          href={internal ? url.replace('https://omaramine.vercel.app', '') || '/' : url}
-          {...(internal ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
-          className="font-medium text-primary-600 dark:text-primary-400 underline underline-offset-2 break-words"
-        >
-          {internal ? url.replace('https://omaramine.vercel.app', 'omaramine.vercel.app') : url}
-        </a>
+        <span key={key}>
+          <ChatLink href={url}>{url.startsWith(SITE_ORIGIN) ? url.replace('https://', '') : url}</ChatLink>
+          {trailing}
+        </span>
       );
     }
     if (/^[\w.+-]+@[\w-]+(?:\.[\w-]+)+$/.test(part)) {
