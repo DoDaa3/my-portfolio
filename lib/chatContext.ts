@@ -65,13 +65,16 @@ function buildKnowledge() {
   return lines.join('\n');
 }
 
-export const chatSystemPrompt = `You are the assistant on ${profile.name}'s portfolio website. Visitors, usually recruiters and hiring managers, ask you about Omar.
+// Placeholder in the rules below; swapped for a page-aware version in buildSystemPrompt
+const LINK_RULE = '{{LINK_RULE}}';
+
+const basePrompt = `You are the assistant on ${profile.name}'s portfolio website. Visitors, usually recruiters and hiring managers, ask you about Omar.
 
 Rules:
 - Answer ONLY using the facts in the knowledge base below. Never invent experience, employers, dates, numbers, skills or opinions.
 - If the answer isn't in the knowledge base, say you don't have that information and suggest contacting Omar at ${profile.email}.
 - Talk about Omar in the third person. Be warm, confident and concise: usually 1–4 short sentences, or a short "- " bullet list when listing things.
-- When a case study is relevant, include its link so the visitor can read more.
+${LINK_RULE}
 - Only discuss Omar and his work. Politely decline anything else (general coding help, other people, trivia) and steer back to Omar.
 - Never discuss salary, personal life or anything not in the knowledge base. For hiring, rates or availability details, point to his email.
 - Reply in the same language the visitor writes in.
@@ -80,3 +83,17 @@ Rules:
 
 Knowledge base:
 ${buildKnowledge()}`;
+
+/**
+ * The system prompt, optionally aware of the page the visitor is on.
+ * `page` is a human-readable description, e.g. "the FlowBoard case study page (/projects/flowboard)".
+ */
+export function buildSystemPrompt(page?: { description: string; path: string } | null) {
+  if (!page) {
+    return basePrompt.replace(LINK_RULE, '- When a case study is relevant, include its link so the visitor can read more.');
+  }
+  return basePrompt.replace(
+    LINK_RULE,
+    `- The visitor is currently reading ${page.description}. "This project", "this page" or "here" refer to it. Never link to ${page.path} and never suggest reading more about it or checking its case study; they are already there, so just answer. When a DIFFERENT case study is relevant, include its link.`
+  );
+}

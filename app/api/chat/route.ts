@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { chatSystemPrompt } from '@/lib/chatContext';
+import { buildSystemPrompt } from '@/lib/chatContext';
 import { getCaseStudy } from '@/lib/caseStudies';
 
 export const maxDuration = 30;
@@ -31,10 +31,12 @@ interface ChatMessage {
 // Only known routes are described; anything else is ignored.
 function describePage(page: unknown) {
   if (typeof page !== 'string') return null;
-  if (page === '/') return 'the home page (overview of Omar, his experience, skills, projects and contact form)';
+  if (page === '/') {
+    return { path: '/', description: 'the home page (overview of Omar, his experience, skills, projects and contact form)' };
+  }
   const slug = page.match(/^\/projects\/([a-z0-9-]+)\/?$/)?.[1];
   const study = slug ? getCaseStudy(slug) : undefined;
-  return study ? `the ${study.title} case study page (${page})` : null;
+  return study ? { path: `/projects/${study.slug}`, description: `the ${study.title} case study page` } : null;
 }
 
 function parseMessages(body: unknown): ChatMessage[] | null {
@@ -67,7 +69,7 @@ export async function POST(request: Request) {
   }
 
   let messages: ChatMessage[] | null = null;
-  let page: string | null = null;
+  let page: ReturnType<typeof describePage> = null;
   try {
     const body = await request.json();
     messages = parseMessages(body);
@@ -85,15 +87,7 @@ export async function POST(request: Request) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
       body: JSON.stringify({
-        systemInstruction: {
-          parts: [
-            {
-              text: page
-                ? `${chatSystemPrompt}\n\nThe visitor is currently viewing ${page}. If they say "this project", "this page" or "here", they mean that. They are reading this page right now: never link to it, and never suggest reading more about it or checking its case study. Just answer. Linking to other pages is fine.`
-                : chatSystemPrompt,
-            },
-          ],
-        },
+        systemInstruction: { parts: [{ text: buildSystemPrompt(page) }] },
         contents: messages.map((m) => ({
           role: m.role === 'assistant' ? 'model' : 'user',
           parts: [{ text: m.content }],
