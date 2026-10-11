@@ -89,7 +89,7 @@ export async function POST(request: Request) {
           parts: [
             {
               text: page
-                ? `${chatSystemPrompt}\n\nThe visitor is currently viewing ${page}. If they say "this project", "this page" or "here", they mean that.`
+                ? `${chatSystemPrompt}\n\nThe visitor is currently viewing ${page}. If they say "this project", "this page" or "here", they mean that. They are already on this page, so never link to it or tell them where to read more about it; link only to other pages.`
                 : chatSystemPrompt,
             },
           ],
