@@ -24,7 +24,10 @@ function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
+    // Check right away too: after a reload the browser restores the scroll position
+    // without firing a scroll event, which left the nav transparent mid-page
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
