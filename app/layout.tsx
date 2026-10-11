@@ -59,7 +59,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <ThemeProvider>
           <div className="min-h-screen flex flex-col">
             <Navbar />
-            <main className="flex-1">{children}</main>
+            {/* Clip sideways overflow from slide-in animations so mobile can't scroll horizontally */}
+            <main className="flex-1 overflow-x-clip">{children}</main>
             <Footer />
           </div>
           <ChatWidget />
