@@ -50,6 +50,7 @@ function buildKnowledge() {
     lines.push(`Stack: ${study.stack.join(', ')}`);
     lines.push(...study.overview);
     lines.push(`Features: ${study.features.join('; ')}`);
+    if (study.video) lines.push(`Demo video on the case study page ("See it in action"): ${study.video.caption ?? study.video.title}`);
     for (const decision of study.decisions) lines.push(`- ${decision.title}: ${decision.body}`);
     lines.push(`Hardest part (${study.challenge.title}): ${study.challenge.body.join(' ')}`);
     lines.push(`${study.nextHeading ?? "What's next"}: ${study.next.join('; ')}`);

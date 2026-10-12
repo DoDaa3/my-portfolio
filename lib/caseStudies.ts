@@ -13,6 +13,15 @@ export interface CaseStudyImage {
   narrow?: boolean;
 }
 
+export interface CaseStudyVideo {
+  youtubeId: string;
+  /** Seconds; the embed plays only this segment */
+  start?: number;
+  end?: number;
+  title: string;
+  caption?: string;
+}
+
 export interface CaseStudy {
   slug: string;
   projectTitle: string;
@@ -23,6 +32,8 @@ export interface CaseStudy {
   liveUrl?: string;
   githubUrl?: string;
   cover?: CaseStudyImage;
+  /** Shown as "See it in action" after the features */
+  video?: CaseStudyVideo;
   overview: string[];
   features: string[];
   decisions: { title: string; body: string }[];
@@ -232,6 +243,13 @@ export const caseStudies: CaseStudy[] = [
       'A layer system to reorder, show and hide elements',
       'Export the finished design as the post’s featured image',
     ],
+    video: {
+      youtubeId: 'jHJkLbL3SP0',
+      start: 117.5,
+      end: 281.5,
+      title: 'FCN4U featured image editor walkthrough',
+      caption: 'The thumbnail editor I built, demoed on the live site (1:57–4:41 of the “How to create a blog post overview” video).',
+    },
     decisions: [
       {
         title: 'Build the editor instead of buying one',

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { caseStudies, getCaseStudy, type CaseStudyImage } from '@/lib/caseStudies';
 import { OG_IMAGE, SITE_NAME } from '@/lib/site';
+import YouTubeSegment from '@/components/YouTubeSegment';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -179,6 +180,34 @@ export default async function CaseStudyPage({ params }: PageProps) {
               ))}
             </ul>
           </section>
+
+          {/* Video */}
+          {study.video && (
+            <section>
+              <SectionHeading>See it in action</SectionHeading>
+              <figure>
+                <div className="overflow-hidden rounded-xl border border-gray-200 dark:border-gray-800 shadow-lg aspect-video bg-black">
+                  <YouTubeSegment
+                    youtubeId={study.video.youtubeId}
+                    start={study.video.start}
+                    end={study.video.end}
+                    title={study.video.title}
+                  />
+                </div>
+                <figcaption className="mt-3 text-sm text-center text-gray-500 dark:text-gray-400">
+                  {study.video.caption}{' '}
+                  <a
+                    href={`https://youtu.be/${study.video.youtubeId}${study.video.start ? `?t=${study.video.start}` : ''}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-primary-600 dark:text-primary-400 hover:underline"
+                  >
+                    Watch on YouTube &#8599;
+                  </a>
+                </figcaption>
+              </figure>
+            </section>
+          )}
 
           {/* Decisions */}
           <section>
