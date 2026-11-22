@@ -125,6 +125,8 @@ export const skillCategories: SkillCategory[] = [
       { name: 'PostgreSQL', color: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300' },
       { name: 'Supabase', color: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300' },
       { name: 'AWS S3', color: 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300' },
+      { name: 'Paddle (payments)', color: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300' },
+      { name: 'Resend (email)', color: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300' },
     ],
   },
   {
@@ -144,6 +146,8 @@ export const skillCategories: SkillCategory[] = [
       { name: 'Git', color: 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300' },
       { name: 'GitHub', color: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300' },
       { name: 'Vercel', color: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300' },
+      { name: 'Cloudflare Workers', color: 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300' },
+      { name: 'Vitest', color: 'bg-lime-100 text-lime-800 dark:bg-lime-900/30 dark:text-lime-300' },
       { name: 'SSR / SEO', color: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300' },
     ],
   },
