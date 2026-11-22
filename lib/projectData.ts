@@ -16,6 +16,16 @@ export interface Project {
 
 export const fallbackProjects: Project[] = [
   {
+    _id: '7',
+    title: 'Liftlisted',
+    description:
+      'My own SaaS for validating ideas before building them: a waitlist page that collects signups, pledges and one-question surveys, then turns them into a demand score.',
+    image: '/images/projects/liftlisted-home.webp',
+    imagePosition: 'left',
+    techStack: ['Next.js', 'TypeScript', 'Supabase', 'Cloudflare Workers', 'Paddle', 'Tailwind CSS'],
+    liveUrl: 'https://liftlisted.com',
+  },
+  {
     _id: '1',
     title: 'FlowBoard',
     description:

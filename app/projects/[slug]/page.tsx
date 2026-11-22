@@ -187,23 +187,40 @@ export default async function CaseStudyPage({ params }: PageProps) {
               <SectionHeading>See it in action</SectionHeading>
               <figure>
                 <div className="overflow-hidden rounded-xl border border-gray-200 dark:border-gray-800 shadow-lg aspect-video bg-black">
-                  <YouTubeSegment
-                    youtubeId={study.video.youtubeId}
-                    start={study.video.start}
-                    end={study.video.end}
-                    title={study.video.title}
-                  />
+                  {study.video.youtubeId ? (
+                    <YouTubeSegment
+                      youtubeId={study.video.youtubeId}
+                      start={study.video.start}
+                      end={study.video.end}
+                      title={study.video.title}
+                    />
+                  ) : (
+                    <video
+                      src={study.video.src}
+                      poster={study.video.poster}
+                      controls
+                      preload="none"
+                      playsInline
+                      aria-label={study.video.title}
+                      className="w-full h-full"
+                    />
+                  )}
                 </div>
                 <figcaption className="mt-3 text-sm text-center text-gray-500 dark:text-gray-400">
-                  {study.video.caption}{' '}
-                  <a
-                    href={`https://youtu.be/${study.video.youtubeId}${study.video.start ? `?t=${study.video.start}` : ''}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-medium text-primary-600 dark:text-primary-400 hover:underline"
-                  >
-                    Watch on YouTube &#8599;
-                  </a>
+                  {study.video.caption}
+                  {study.video.youtubeId && (
+                    <>
+                      {' '}
+                      <a
+                        href={`https://youtu.be/${study.video.youtubeId}${study.video.start ? `?t=${Math.floor(study.video.start)}` : ''}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-medium text-primary-600 dark:text-primary-400 hover:underline"
+                      >
+                        Watch on YouTube &#8599;
+                      </a>
+                    </>
+                  )}
                 </figcaption>
               </figure>
             </section>

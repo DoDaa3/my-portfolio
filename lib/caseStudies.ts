@@ -14,7 +14,11 @@ export interface CaseStudyImage {
 }
 
 export interface CaseStudyVideo {
-  youtubeId: string;
+  /** Either a YouTube video... */
+  youtubeId?: string;
+  /** ...or a self-hosted video file */
+  src?: string;
+  poster?: string;
   /** Seconds; the embed plays only this segment */
   start?: number;
   end?: number;
@@ -45,6 +49,102 @@ export interface CaseStudy {
 }
 
 export const caseStudies: CaseStudy[] = [
+  {
+    slug: 'liftlisted',
+    projectTitle: 'Liftlisted',
+    title: 'Liftlisted',
+    tagline: 'Test if people want your idea before you build it: a waitlist page that shows real demand and what people would pay.',
+    meta: {
+      role: 'Founder: product, design & development',
+      timeline: 'Mar – Nov 2026',
+      type: 'My own SaaS (live, public beta)',
+      team: 'Solo project',
+    },
+    stack: [
+      'Next.js',
+      'TypeScript',
+      'Tailwind CSS',
+      'Cloudflare Workers',
+      'Supabase',
+      'PostgreSQL',
+      'Paddle',
+      'Resend',
+      'Vitest',
+    ],
+    liveUrl: 'https://liftlisted.com/demo',
+    cover: {
+      src: '/images/projects/liftlisted-home.webp',
+      alt: 'Liftlisted landing page: Don’t just collect emails. Collect proof.',
+      width: 1600,
+      height: 1000,
+    },
+    overview: [
+      'Most waitlists only collect emails, which says little about whether anyone would actually pay. Liftlisted gives founders a waitlist page in about 30 seconds where visitors can also pledge what they would pay (nobody is charged) and answer one survey question. It turns all of that into a demand score that can be shared publicly.',
+      'I designed the product, made every product and technical decision, and run it in production with paid plans (Free, Starter and Pro). I planned each feature, reviewed and tested the code, and used AI-assisted development to ship faster.',
+    ],
+    features: [
+      '9 page types (SaaS, app, game, product, course, community, service, local business, event), each with its own fields and wording',
+      'Pledges and a one-question survey on every signup',
+      'A shareable demand score report: signups, pledges, conversion and confidence',
+      'Referral links with a leaderboard, plus signup milestones',
+      'Embeddable signup form and an Explore page to discover ideas',
+      'Email broadcasts to the waitlist and launch-link sales tracking',
+      'Custom domains for customers (beta)',
+      'Brand-colored themes across the page, embed, emails and link previews',
+    ],
+    video: {
+      src: '/videos/liftlisted-demo.webm',
+      poster: '/images/projects/liftlisted-report.webp',
+      title: 'Liftlisted product walkthrough',
+      caption: 'A 4-minute walkthrough of Liftlisted, from creating a page to reading the demand report.',
+    },
+    decisions: [
+      {
+        title: 'Run on the edge with Cloudflare Workers',
+        body: 'The Next.js app runs on Cloudflare Workers through OpenNext, with automatic deploys from GitHub. Scheduled jobs handle onboarding emails and weekly summaries, and Cloudflare for SaaS gives customers their own custom domains.',
+      },
+      {
+        title: 'Security and plan limits in the database',
+        body: 'Supabase Postgres uses row-level security, and plan limits are enforced in the database rather than only in the UI, so they can’t be bypassed. Sign-in uses Google or a magic link, with Turnstile for bot protection.',
+      },
+      {
+        title: 'Real billing and email',
+        body: 'Subscriptions run through Paddle with webhooks keeping plans in sync. Transactional and sign-in emails are sent with Resend from the product’s own domain.',
+      },
+      {
+        title: 'Tested before it ships',
+        body: '339 automated tests (Vitest) cover the core logic, and production errors are emailed to me so problems surface quickly.',
+      },
+    ],
+    challenge: {
+      title: 'Sign-in links that sent people back to the login page',
+      body: [
+        'New users clicked the confirmation link in their email and landed on the login page again. The cause was the PKCE flow: the link only worked in the same browser that requested it, which often isn’t the case when people open email on another device or app.',
+        'I rebuilt the email links on token hashes so they work in any browser, and moved sign-in emails to the product’s own domain. Along the way I also fixed pages loading twice and white flashes on phones, and kept the app under Cloudflare’s 3 MB free-plan Worker limit while adding image generation.',
+      ],
+    },
+    gallery: [
+      {
+        src: '/images/projects/liftlisted-report.webp',
+        alt: 'Liftlisted validation report with a demand score of 78 and a chart of what people would pay',
+        width: 1600,
+        height: 1090,
+        caption: 'The demand score report creators get (from the live demo).',
+      },
+      {
+        src: '/images/projects/liftlisted-event.webp',
+        alt: 'A Liftlisted waitlist page for an event, with date, location, signups and pledges',
+        width: 1600,
+        height: 920,
+        caption: 'An event page: each of the 9 page types has its own fields and wording.',
+      },
+    ],
+    nextHeading: 'Outcome',
+    next: [
+      'Live at liftlisted.com in public beta, with Free, Starter ($9/mo) and Pro ($19/mo) plans',
+      'A public live demo anyone can try without signing up',
+    ],
+  },
   {
     slug: 'flowboard',
     projectTitle: 'FlowBoard',
