@@ -71,7 +71,7 @@ export const caseStudies: CaseStudy[] = [
       'Resend',
       'Vitest',
     ],
-    liveUrl: 'https://liftlisted.com/demo',
+    liveUrl: 'https://liftlisted.com',
     cover: {
       src: '/images/projects/liftlisted-home.webp',
       alt: 'Liftlisted landing page: Don’t just collect emails. Collect proof.',

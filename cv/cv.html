@@ -28,11 +28,11 @@
       font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif;
       color: var(--ink);
       font-size: 9.3pt;
-      line-height: 1.42;
+      line-height: 1.4;
       -webkit-print-color-adjust: exact;
       print-color-adjust: exact;
     }
-    .page { padding: 11mm 14mm 8mm; }
+    .page { padding: 10mm 14mm 5mm; }
     a { color: inherit; text-decoration: none; }
 
     /* Header */
@@ -45,7 +45,7 @@
     .summary { margin-top: 3.5mm; color: var(--muted); font-size: 9.8pt; }
 
     /* Sections */
-    section { margin-top: 4.2mm; }
+    section { margin-top: 3mm; }
     h2 {
       font-size: 8.6pt; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
       color: var(--accent); padding-bottom: 1.5mm; margin-bottom: 2.4mm; border-bottom: 1px solid var(--line);
@@ -149,13 +149,21 @@
 
     <section>
       <h2>Projects</h2>
+      <div class="item">
+        <div class="item-head">
+          <div class="item-title">Liftlisted <span class="item-sub" style="font-weight:400">· Founder: product, design &amp; development · 2026</span></div>
+          <a class="link" href="https://liftlisted.com">Live ↗</a>
+        </div>
+        <p>My own SaaS, live with paid plans: waitlist pages that turn signups, pledges and surveys into a demand score.</p>
+        <div class="stack"><span>Next.js</span><span>TypeScript</span><span>Supabase</span><span>Cloudflare Workers</span><span>Paddle</span></div>
+      </div>
       <div class="two-col">
         <div class="item">
           <div class="item-head">
             <div class="item-title">AI Content Studio</div>
             <a class="link" href="https://ai-content-studio-zeta-gules.vercel.app/">Live ↗</a>
           </div>
-          <p>AI writing platform powered by Google Gemini, with Supabase auth, React Query and live markdown rendering.</p>
+          <p>AI writing platform powered by Google Gemini, with Supabase auth, React Query and live markdown.</p>
           <div class="stack"><span>Next.js</span><span>TypeScript</span><span>Supabase</span><span>Gemini AI</span></div>
         </div>
         <div class="item">
@@ -172,11 +180,11 @@
     <section>
       <h2>Skills</h2>
       <dl class="skills">
-        <dt>Frontend</dt><dd>React, Next.js, TypeScript, JavaScript (ES6+), HTML5, CSS3, Tailwind CSS, React Query, Fabric.js</dd>
-        <dt>Backend</dt><dd>Node.js, Express, Socket.io, REST APIs, Supabase, AWS S3</dd>
+        <dt>Frontend</dt><dd>React, Next.js, TypeScript, JavaScript, HTML5, CSS3, Tailwind CSS, React Query, Fabric.js</dd>
+        <dt>Backend</dt><dd>Node.js, Express, Socket.io, REST APIs, Supabase, AWS S3, Paddle (payments), Resend (email)</dd>
         <dt>Databases</dt><dd>PostgreSQL, MongoDB, MySQL, SQL Server</dd>
         <dt>Design</dt><dd>Figma, responsive design, UI/UX, accessibility</dd>
-        <dt>Tools &amp; other</dt><dd>Git, GitHub, Vercel, SSR / SEO · Python, C#, ASP.NET</dd>
+        <dt>Tools &amp; other</dt><dd>Git, GitHub, Vercel, Cloudflare Workers, Vitest, SSR / SEO · Python, C#, ASP.NET</dd>
       </dl>
     </section>
 
